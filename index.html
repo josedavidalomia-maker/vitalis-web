@@ -2769,10 +2769,24 @@ function buildCRMObj() {
   };
 }
 
+function sendCRMByEmail(crm) {
+  /* Respaldo permanente: cada prospecto IVSO llega tambien por correo (FormSubmit) */
+  try {
+    var payload = { _subject: '\uD83C\uDFAF Nuevo prospecto IVSO \u2014 ' + (crm['Empresa']||'-') + ' (' + (crm['Clasificacion']||'-') + ')', _template: 'table', _captcha: 'false' };
+    for (var k in crm) { if (crm.hasOwnProperty(k)) payload[k] = crm[k]; }
+    fetch('https://formsubmit.co/ajax/5459a08357b3ed56bd9cb1c6d11e9af7', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+  } catch(e) {}
+}
+
 function sendCRMToSheet(crm) {
   var msgEl = document.getElementById('crmsg');
+  sendCRMByEmail(crm);
   if (!SHEET_WEBAPP_URL) {
-    if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='Registro automatico no configurado. Usa "Copiar datos CRM" y pegalos en la hoja de Prospectos.'; }
+    if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto enviado a tu correo (' + (crm['Empresa']||'-') + '). El registro en Google Sheets aun no esta configurado.'; }
     return;
   }
   if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='Registrando automaticamente en la base de prospectos...'; }
