@@ -516,6 +516,7 @@ img{max-width:100%;height:auto}
 .ivso-wrap .cta-note {font-size:11px;color:rgba(255,255,255,.4);margin-top:8px}
 .ivso-wrap .rpt-box {background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:16px;margin-bottom:12px}
 .ivso-wrap .rpt-title {font-size:12px;font-weight:700;color:#6B7280;margin-bottom:10px}
+.ivso-wrap .rpt-box{display:none}
 .ivso-wrap .rpt-pre {font-size:11.5px;font-family:monospace;white-space:pre-wrap;color:#1F2937;line-height:1.7;max-height:300px;overflow-y:auto}
 .ivso-wrap .crmc {background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px;margin-bottom:12px}
 .ivso-wrap .crmt {font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px}
@@ -1554,10 +1555,11 @@ img{max-width:100%;height:auto}
     <div id="dai"><div class="spin-r"><div class="spin"></div>Generando analisis ejecutivo...</div></div>
   </div>
   <div class="cta-box">
-    <div class="cta-title">Su organizacion esta a un paso de la solucion</div>
-    <div class="cta-sub" id="cta-text">Basado en los resultados de su diagnostico, el equipo de Vitalis Empresarial puede acompanarle con una sesion ejecutiva gratuita de 30 minutos para revisar los hallazgos y definir el plan de accion especifico para su empresa.</div>
+    <div class="cta-title">Revisemos sus resultados juntos</div>
+    <div class="cta-sub" id="cta-text">En una sesion ejecutiva gratuita de 30 minutos le explicamos el significado de cada hallazgo, por que aplica a su organizacion y cuales son las acciones concretas para remediarlo. Sin compromiso.</div>
     <a class="cta-btn" id="cta-link" href="mailto:josedavidalomia@gmail.com">Agendar sesion ejecutiva gratuita &mdash; 30 minutos</a>
     <div class="cta-note">Sin compromiso. Sin costo. Solo resultados.</div>
+    <div style="margin-top:14px"><button id="pdf-btn" onclick="genPDF()" style="background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif">Descargar mi informe (PDF)</button></div>
   </div>
   <div class="rpt-box">
     <div class="rpt-title">Informe ejecutivo completo</div>
@@ -2496,7 +2498,7 @@ function showRes() {
     var v = ans[p.k];
     var bg = v === 0 ? '#DCFCE7' : v === 2 ? '#FEF9C3' : '#FEE2E2';
     var tc = v === 0 ? '#166534' : v === 2 ? '#854D0E' : '#991B1B';
-    var icon = v === 0 ? 'OK' : v === 2 ? 'AVISO' : (v === 4 ? 'ERROR' : '?');
+    var icon = v === 0 ? 'AL DIA' : v === 2 ? 'PARCIAL' : (v === 4 ? 'PENDIENTE' : '--');
     var val = v === undefined ? '--' : p.v[v === 0 ? 0 : v === 2 ? 1 : 2];
     return '<div class="lp" style="background:' + bg + '">' +
       '<div class="li" style="color:' + tc + '">' + icon + '</div>' +
@@ -2519,6 +2521,18 @@ function showRes() {
     (str.map(function(s) { return '<div class="ii"><div class="idot" style="background:#22C55E"></div>' + s + '</div>'; }).join('') || "<div class='ii'>En construccion</div>") + '</div>' +
     '<div class="ic icf"><div class="ict">Oportunidades de mejora</div>' +
     (opp.map(function(o) { return '<div class="ii"><div class="idot" style="background:#EAB308"></div>' + o + '</div>'; }).join('') || "<div class='ii'>--</div>") + '</div>';
+
+  /* Snapshot para el PDF descargable */
+  try {
+    window.__ivsoPDF = {
+      emp: emp, fecha: fecha, ivso: ivso, lvl: lv.lbl, lvlColor: lv.cl,
+      sect: document.getElementById('fse').value || '',
+      n: document.getElementById('fn').value || '',
+      contacto: document.getElementById('fco') ? (document.getElementById('fco').value||'') : '',
+      dims: all.map(function(d){ return {n: d.n, pct: dsc(d).pct}; }),
+      risks: risks.slice(), str: str.slice(), opp: opp.slice()
+    };
+  } catch(e) {}
 
   /* Benchmark */
   var benchData = [
@@ -2553,9 +2567,11 @@ function showRes() {
   var recHtml = '<div class="rec-box ' + urgClass + '"><div class="rec-title" style="color:' + urgColor + '">' + urgTitle + '</div>';
   recs.forEach(function(r) {
     recHtml += '<div class="rec-item"><div class="rec-num" style="background:' + r.color + '">' + r.num + '</div>' +
-      '<div><div class="rec-body"><strong>' + r.title + '</strong><br>' + r.body + '</div>' +
-      '<div class="rec-svc">Servicio Vitalis: ' + r.svc + '</div></div></div>';
+      '<div><div class="rec-body"><strong>' + r.title + '</strong></div></div></div>';
   });
+  recHtml += '<div style="margin-top:16px;padding:14px 16px;background:#fff;border:1.5px dashed #C9A84C;border-radius:10px;font-size:13px;color:#374151;line-height:1.65">' +
+    'Estos son los frentes que su organizacion debe atender. En una <strong>reunion ejecutiva gratuita de 30 minutos</strong> le explicamos que significa cada hallazgo, por que aplica a su empresa y cual es la ruta concreta de remediacion. ' +
+    '<a id="rec-cta" href="mailto:josedavidalomia@gmail.com" style="color:#0E7C7B;font-weight:700;text-decoration:underline">Solicitar la reunion &rarr;</a></div>';
   recHtml += '</div>';
   document.getElementById('d-recs').innerHTML = recHtml;
 
@@ -2563,6 +2579,8 @@ function showRes() {
   var mailSub = 'Sesion Ejecutiva Vitalis — ' + emp;
   var mailBody = 'Hola Jose David,\n\nCompleto el Indice Vitalis y me gustaria agendar la sesion ejecutiva gratuita de 30 minutos.\n\nEmpresa: ' + emp + '\nContacto: ' + (document.getElementById('fco').value || '') + '\nTelefono: ' + (document.getElementById('ftel').value || '') + '\n\nGracias.';
   document.getElementById('cta-link').href = 'mailto:josedavidalomia@gmail.com?subject=' + encodeURIComponent(mailSub) + '&body=' + encodeURIComponent(mailBody);
+  var rc = document.getElementById('rec-cta');
+  if (rc) rc.href = document.getElementById('cta-link').href;
   document.getElementById('cta-text').textContent = 'Su diagnostico identifica ' + recs.length + ' area(s) de atencion prioritaria. El equipo de Vitalis Empresarial puede revisar estos hallazgos en una sesion ejecutiva gratuita de 30 minutos y definir el plan de accion especifico. Sin compromiso.';
 
   /* Build report immediately */
@@ -2659,23 +2677,23 @@ function buildRpt(ivso, lv, lc, recs, aiText, fecha) {
    AI CALL
 ================================================================ */
 /* Analisis ejecutivo generado localmente (respaldo sin IA) */
-function localAnalysis(ivso, lv, risks, str, nc, sveSt, pain, recSvcs, emp, sect, n) {
-  var p1, p2, p3, plan;
+function localAnalysis(ivso, lv, risks, str, opp, nc, sveSt, pain, emp, sect, n) {
+  var p1, pF, pM, pC, p5;
   if (ivso >= 75) {
-    p1 = emp + ' presenta un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '), lo que refleja una gestion del talento con fundamentos solidos en el sector ' + sect + '. Los indicadores de personas actuan hoy como palanca de productividad y no como fuente de costos ocultos. Las fortalezas identificadas (' + (str.join(', ')||'gestion en consolidacion') + ') representan una ventaja competitiva para retener talento clave y sostener la operacion con ' + n + ' colaboradores.';
+    p1 = emp + ' presenta un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '), lo que refleja una gestion del talento con fundamentos solidos en el sector ' + sect + '. Los indicadores de personas actuan hoy como palanca de productividad y no como fuente de costos ocultos para una operacion de ' + n + ' colaboradores.';
   } else if (ivso >= 50) {
-    p1 = emp + ' obtiene un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '). El diagnostico evidencia que los factores de personas ya estan generando fugas de valor medibles: el principal desafio reportado (' + pain + ') suele traducirse en sobrecostos de rotacion (50%-200% del salario anual por reemplazo), ausentismo y perdida de productividad. Los riesgos identificados (' + (risks.join(', ')||'en niveles moderados') + ') requieren intervencion antes de que escalen.';
+    p1 = emp + ' obtiene un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '). El diagnostico muestra una base de gestion en construccion: hay dimensiones que ya funcionan como fortalezas y otras donde los factores de personas estan generando fugas de valor medibles. El principal desafio reportado (' + pain + ') suele traducirse en sobrecostos de rotacion, ausentismo y perdida de productividad si no se gestiona a tiempo.';
   } else {
-    p1 = emp + ' registra un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '), un nivel que indica impacto directo y actual sobre los resultados del negocio. Los riesgos criticos detectados (' + (risks.join(', ')||'multiples dimensiones comprometidas') + ') estan asociados a rotacion costosa, incapacidades por estres (1.5 dias-salario de perdida por cada dia de incapacidad) y conflictos laborales que pueden costar entre 15 y 30 SMMLV por caso.';
+    p1 = emp + ' registra un indice IVSO de ' + ivso + '/100 (' + lv.lbl + '), un nivel que indica impacto directo y actual sobre los resultados del negocio, con senales asociadas a rotacion costosa, incapacidades por estres y riesgo de conflictos laborales.';
   }
-  if (nc && nc !== 'ninguno') {
-    p2 = 'En el frente legal, la empresa presenta brechas frente a la normativa SST colombiana: ' + nc + '. Bajo la Res. 2764/2022 y el Decreto 1072/2015, estos incumplimientos exponen a ' + emp + ' a sanciones de hasta 500 SMMLV, cierres temporales y responsabilidad agravada ante un evento de origen psicosocial. El estado del SVE Psicosocial (' + sveSt + ') es el punto de mayor exposicion y debe atenderse con prioridad.';
-  } else {
-    p2 = 'En el frente legal, ' + emp + ' muestra un cumplimiento normativo destacable frente a la Res. 2764/2022 y el Decreto 1072/2015, lo que reduce significativamente su exposicion a sanciones (que pueden alcanzar 500 SMMLV) y fortalece su posicion ante ARL, auditorias y procesos de contratacion. El reto ahora es convertir ese cumplimiento en resultados de clima, retencion y productividad.';
-  }
-  p3 = 'Vitalis Empresarial puede acompanar a la gerencia con una ruta de 90 dias centrada en: ' + (recSvcs||'diagnostico y plan de intervencion psicosocial') + '. El resultado esperado para la direccion: linea base tecnica defendible ante cualquier autoridad, reduccion de los focos de rotacion y ausentismo identificados, y un plan de accion priorizado con indicadores que la gerencia pueda seguir mes a mes.';
-  plan = 'Plan 90 dias: [Diagnostico y linea base sem 1-4] -> [Intervencion focalizada en riesgos criticos sem 5-8] -> [Plan de sostenibilidad e indicadores gerenciales sem 9-12]';
-  return p1 + '\n\n' + p2 + '\n\n' + p3 + '\n\n' + plan;
+  pF = 'Fortalezas: ' + (str.length ? str.join(', ') + '. Estas dimensiones estan sosteniendo hoy la operacion y son la base sobre la cual construir; conviene protegerlas y documentarlas.' : 'el diagnostico no identifico dimensiones en nivel de fortaleza (70+/100), lo que indica que la gestion actual depende mas de las personas que de un sistema.');
+  pM = 'Aspectos a mejorar: ' + (opp.length ? opp.join(', ') + '. Se encuentran en un nivel intermedio: no representan una emergencia, pero son el terreno donde una intervencion bien dirigida genera el mayor retorno en clima, retencion y productividad.' : 'no se identificaron dimensiones en rango intermedio; la brecha esta concentrada en los aspectos a corregir.');
+  var legal = (nc && nc !== 'ninguno')
+    ? ' A esto se suma el frente normativo SST, donde existen obligaciones pendientes que exponen a la empresa a sanciones de hasta 500 SMMLV y responsabilidad agravada ante un evento de origen psicosocial; el estado del SVE Psicosocial (' + sveSt + ') es el punto de mayor exposicion.'
+    : ' En el frente normativo SST la empresa muestra un cumplimiento destacable, lo que reduce significativamente su exposicion legal.';
+  pC = 'Aspectos a corregir: ' + (risks.length ? risks.join(', ') + '. Estas dimensiones estan en nivel critico y requieren intervencion prioritaria antes de que su costo escale.' : 'no se identificaron dimensiones en nivel critico.') + legal;
+  p5 = 'La recomendacion profesional es revisar estos resultados en una sesion ejecutiva de 30 minutos, sin costo, en la que se explica el significado de cada hallazgo, su origen probable y la ruta de remediacion especifica para ' + emp + ', con prioridades y tiempos realistas.';
+  return p1 + '\n\n' + pF + '\n\n' + pM + '\n\n' + pC + '\n\n' + p5;
 }
 
 async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
@@ -2699,14 +2717,16 @@ async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
     'Incumplimientos legales: ' + nc,
     'Estado SVE Psicosocial: ' + sveSt,
     'Principal desafio de personas: ' + pain,
-    'Servicios recomendados: ' + recSvcs,
     'Fecha: ' + fecha,
     '',
-    'ESTRUCTURA (texto corrido, sin encabezados):',
-    'Parrafo 1: Estado del negocio desde los indicadores de personas (impacto en productividad, costos, riesgo).',
-    'Parrafo 2: Brechas legales criticas con riesgo especifico para ESTA empresa (incluye cifras: SMMLV, porcentajes).',
-    'Parrafo 3: Que puede lograr Vitalis Empresarial en 90 dias y que resultado puede esperar la gerencia.',
-    'Ultima linea con formato exacto: "Plan 90 dias: [Accion 1 sem 1-4] -> [Accion 2 sem 5-8] -> [Accion 3 sem 9-12]"'
+    'REGLA CRITICA: NO menciones servicios, productos ni la oferta comercial de Vitalis. El objetivo del texto es que el lector entienda su situacion y quiera agendar una reunion para conocer la ruta de solucion.',
+    '',
+    'ESTRUCTURA (5 parrafos cortos, texto corrido, sin encabezados):',
+    'Parrafo 1: Estado general desde los indicadores de personas (impacto en productividad, costos, riesgo).',
+    'Parrafo 2: Fortalezas identificadas y que valor le generan hoy a la empresa.',
+    'Parrafo 3: Aspectos a mejorar (nivel intermedio) y el retorno de intervenirlos a tiempo.',
+    'Parrafo 4: Aspectos a corregir (criticos y legales) con riesgo especifico para ESTA empresa (incluye cifras: SMMLV).',
+    'Parrafo 5: Cierra invitando a revisar los resultados en una sesion ejecutiva gratuita de 30 minutos donde se explica cada hallazgo y su ruta de remediacion.'
   ].join('\n');
 
   var el = document.getElementById('dai');
@@ -2723,13 +2743,13 @@ async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
       rptFull = buildRpt(calcIVSO(), lvInf(calcIVSO()), lcSt(), buildRecs(calcIVSO(), lcSt(), lvInf(calcIVSO())).recs, txt, fecha);
       document.getElementById('rpt-pre').textContent = rptFull;
     } else {
-      var lt = localAnalysis(ivso, lv, risks, str, nc, sveSt, pain, recSvcs, emp, sect, n);
+      var lt = localAnalysis(ivso, lv, risks, str, opp, nc, sveSt, pain, emp, sect, n);
       el.innerHTML = '<div class="abody">' + lt.replace(/\n/g, '<br>') + '</div>';
       rptFull = buildRpt(calcIVSO(), lvInf(calcIVSO()), lcSt(), buildRecs(calcIVSO(), lcSt(), lvInf(calcIVSO())).recs, lt, fecha);
       document.getElementById('rpt-pre').textContent = rptFull;
     }
   } catch(e) {
-    var lt2 = localAnalysis(ivso, lv, risks, str, nc, sveSt, pain, recSvcs, emp, sect, n);
+    var lt2 = localAnalysis(ivso, lv, risks, str, opp, nc, sveSt, pain, emp, sect, n);
     el.innerHTML = '<div class="abody">' + lt2.replace(/\n/g, '<br>') + '</div>';
     rptFull = buildRpt(calcIVSO(), lvInf(calcIVSO()), lcSt(), buildRecs(calcIVSO(), lcSt(), lvInf(calcIVSO())).recs, lt2, fecha);
     document.getElementById('rpt-pre').textContent = rptFull;
@@ -2737,6 +2757,134 @@ async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
   save();
 }
 
+
+/* ================================================================
+   INFORME PDF DESCARGABLE (documento real, no impresion de pagina)
+================================================================ */
+function loadJsPDF() {
+  return new Promise(function(res, rej) {
+    if (window.jspdf && window.jspdf.jsPDF) return res();
+    var sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    sc.onload = res; sc.onerror = function(){ rej(new Error('jsPDF no cargo')); };
+    document.head.appendChild(sc);
+  });
+}
+function _logoPNG() {
+  try {
+    var im = document.querySelector('img.dlogo') || document.querySelector('img[src*="logo"]');
+    if (!im || !im.naturalWidth) return null;
+    var c = document.createElement('canvas');
+    c.width = im.naturalWidth; c.height = im.naturalHeight;
+    c.getContext('2d').drawImage(im, 0, 0);
+    return c.toDataURL('image/png');
+  } catch(e) { return null; }
+}
+async function genPDF() {
+  var btn = document.getElementById('pdf-btn');
+  var D = window.__ivsoPDF;
+  if (!D) { alert('Complete el diagnostico para generar su informe.'); return; }
+  if (btn) { btn.disabled = true; btn.textContent = 'Generando informe...'; }
+  try {
+    await loadJsPDF();
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({unit:'mm', format:'a4'});
+    var W = 210, M = 18, cw = W - M*2, y;
+    var NAVY = [13,27,42], TEAL = [14,124,123], GREEN = [46,175,125], GOLD = [201,168,76], RED = [220,38,38], GREY = [107,114,128], LIGHT = [242,245,249];
+
+    /* ── Portada / encabezado ── */
+    doc.setFillColor(NAVY[0],NAVY[1],NAVY[2]); doc.rect(0,0,W,52,'F');
+    doc.setFillColor(TEAL[0],TEAL[1],TEAL[2]); doc.rect(0,52,W,1.6,'F');
+    var lg = _logoPNG();
+    if (lg) { doc.setFillColor(255,255,255); doc.roundedRect(M,10,42,17,2,2,'F'); doc.addImage(lg,'PNG',M+3,12,36,13.5); }
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
+    doc.text('Indice Vitalis de Madurez', M+50, 18);
+    doc.text('Psicosocial y Cumplimiento SST', M+50, 25);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(200,210,220);
+    doc.text('Informe ejecutivo de diagnostico organizacional', M+50, 32);
+    doc.setFontSize(9);
+    doc.text(D.emp + '  ·  ' + (D.sect||'-') + '  ·  ' + (D.n||'-') + ' empleados', M, 42);
+    doc.text('Diagnostico realizado el ' + D.fecha, M, 47);
+
+    /* ── Puntaje ── */
+    y = 66;
+    doc.setFillColor(LIGHT[0],LIGHT[1],LIGHT[2]); doc.roundedRect(M,y-8,cw,26,3,3,'F');
+    doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]); doc.setFont('helvetica','bold'); doc.setFontSize(30);
+    doc.text(String(D.ivso), M+8, y+8);
+    doc.setFontSize(11); doc.setTextColor(GREY[0],GREY[1],GREY[2]); doc.text('/100', M+8+doc.getTextWidth(String(D.ivso))*1.05+3, y+8);
+    doc.setFontSize(12); doc.setTextColor(TEAL[0],TEAL[1],TEAL[2]);
+    doc.text('Nivel de madurez: ' + D.lvl, M+45, y+3);
+    doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(GREY[0],GREY[1],GREY[2]);
+    doc.text('Escala: 0-44 Critico  ·  45-69 Moderado  ·  70-100 Optimo', M+45, y+9);
+
+    /* ── Barras por dimension ── */
+    y = 100;
+    doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]);
+    doc.text('Resultados por dimension', M, y); y += 7;
+    doc.setFontSize(9);
+    D.dims.forEach(function(d) {
+      var col = d.pct >= 70 ? GREEN : d.pct >= 45 ? GOLD : RED;
+      doc.setFont('helvetica','normal'); doc.setTextColor(55,65,81);
+      doc.text(d.n, M, y+3.5);
+      doc.setFillColor(229,231,235); doc.roundedRect(M+72, y, 80, 4.5, 2, 2, 'F');
+      doc.setFillColor(col[0],col[1],col[2]); if (d.pct>2) doc.roundedRect(M+72, y, Math.max(4.5, 80*d.pct/100), 4.5, 2, 2, 'F');
+      doc.setFont('helvetica','bold'); doc.setTextColor(col[0],col[1],col[2]);
+      doc.text(d.pct + '/100', M+156, y+3.5);
+      y += 9;
+    });
+
+    /* ── Fortalezas / Mejorar / Corregir ── */
+    y += 4;
+    function lista(titulo, items, col, vacio) {
+      doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(col[0],col[1],col[2]);
+      doc.text(titulo, M, y); y += 5.5;
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(55,65,81);
+      (items.length ? items : [vacio]).forEach(function(it) {
+        doc.setFillColor(col[0],col[1],col[2]); doc.circle(M+1.5, y-1.2, 1, 'F');
+        doc.text(it, M+5, y); y += 5.5;
+      });
+      y += 3;
+    }
+    lista('Fortalezas', D.str, GREEN, 'En construccion');
+    lista('Aspectos a mejorar', D.opp, GOLD, 'Sin dimensiones en rango intermedio');
+    lista('Aspectos a corregir', D.risks, RED, 'Sin dimensiones en nivel critico');
+
+    /* ── Pagina 2: analisis + invitacion ── */
+    doc.addPage();
+    doc.setFillColor(NAVY[0],NAVY[1],NAVY[2]); doc.rect(0,0,W,16,'F');
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text('Analisis ejecutivo — ' + D.emp, M, 10);
+    y = 28;
+    var aiEl = document.querySelector('#dai .abody');
+    var analisis = aiEl ? aiEl.innerText : 'Analisis no disponible.';
+    doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(31,41,55);
+    var lines = doc.splitTextToSize(analisis, cw);
+    lines.forEach(function(ln) {
+      if (y > 250) { doc.addPage(); y = 24; }
+      doc.text(ln, M, y); y += 5.4;
+    });
+
+    /* Invitacion */
+    if (y > 220) { doc.addPage(); y = 24; }
+    y += 6;
+    doc.setFillColor(NAVY[0],NAVY[1],NAVY[2]); doc.roundedRect(M, y, cw, 42, 3, 3, 'F');
+    doc.setTextColor(GOLD[0],GOLD[1],GOLD[2]); doc.setFont('helvetica','bold'); doc.setFontSize(13);
+    doc.text('Revisemos sus resultados juntos', W/2, y+11, {align:'center'});
+    doc.setTextColor(255,255,255); doc.setFont('helvetica','normal'); doc.setFontSize(9.5);
+    doc.text('Sesion ejecutiva gratuita de 30 minutos para explicar cada hallazgo y su ruta de remediacion.', W/2, y+19, {align:'center'});
+    doc.setFont('helvetica','bold'); doc.setFontSize(10);
+    doc.text('+57 315 053 0457   ·   WhatsApp +57 316 876 8220', W/2, y+28, {align:'center'});
+    doc.text('josedavidalomia@gmail.com', W/2, y+35, {align:'center'});
+
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(GREY[0],GREY[1],GREY[2]);
+    doc.text('(c) 2026 Vitalis Empresarial(R) — Jose David Alomia Gutierrez, Psicologo Especialista en SST. Documento generado a partir del autodiagnostico IVSO; no sustituye la Bateria de Riesgo Psicosocial.', M, 285, {maxWidth: cw});
+
+    doc.save('Informe_IVSO_' + D.emp.replace(/[^A-Za-z0-9]+/g,'_').slice(0,40) + '.pdf');
+  } catch(err) {
+    alert('No fue posible generar el PDF. Verifique su conexion e intente de nuevo.');
+  }
+  if (btn) { btn.disabled = false; btn.textContent = 'Descargar mi informe (PDF)'; }
+}
 /* ================================================================
    CRM
 ================================================================ */
@@ -2809,7 +2957,7 @@ function sendCRMToSheet(crm) {
       method: 'POST',
       mode: 'no-cors',
       headers: {'Content-Type': 'text/plain;charset=utf-8'},
-      body: JSON.stringify(crm)
+      body: JSON.stringify(Object.assign({}, crm, {'Informe completo': (typeof rptFull==='string'? rptFull : '')}))
     }).then(function() {
       if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto registrado automaticamente en Google Sheets (' + crm['Empresa'] + ').'; }
     }).catch(function() {
@@ -2955,6 +3103,7 @@ setTimeout(load, 150);
 
 // Expose globals
 window.startEval=startEval;
+window.genPDF=genPDF;
 window.selOpt=selOpt;
 window.tryNext=tryNext;
 window.gst=gst;
