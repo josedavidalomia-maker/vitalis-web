@@ -517,6 +517,8 @@ img{max-width:100%;height:auto}
 .ivso-wrap .rpt-box {background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:16px;margin-bottom:12px}
 .ivso-wrap .rpt-title {font-size:12px;font-weight:700;color:#6B7280;margin-bottom:10px}
 .ivso-wrap .rpt-box{display:none}
+.ivso-wrap .crmc{display:none}
+.ivso-wrap .ab{display:none}
 .ivso-wrap .rpt-pre {font-size:11.5px;font-family:monospace;white-space:pre-wrap;color:#1F2937;line-height:1.7;max-height:300px;overflow-y:auto}
 .ivso-wrap .crmc{display:none}
 .ivso-wrap .crmc-off {background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px;margin-bottom:12px}
@@ -1536,14 +1538,14 @@ img{max-width:100%;height:auto}
     <div class="hsub" id="hsub1">-</div>
     <div class="hsub" id="hsub2">-</div>
     <div class="hbt" style="margin-top:12px"><div class="hbf" id="hbar" style="width:0%"></div></div>
-    <div class="hbl"><span>0 Crítico</span><span>50 Moderado</span><span>100 Optimo</span></div>
+    <div class="hbl"><span>0 Crítico</span><span>50 Moderado</span><span>100 Óptimo</span></div>
   </div>
   <div class="mc"><div class="mct">Nivel de madurez organizacional</div><div class="msr" id="dmat"></div></div>
   <div id="ddims"></div>
   <div class="lgd" id="dlegal"></div>
   <div class="ig" id="dins"></div>
   <div class="bc"><div class="bct">Benchmark sectorial</div><div id="dbench"></div></div>
-  <div class="cc"><div class="cct">Perfil de madurez IVSO por dimension</div><div class="cw"><canvas id="rc"></canvas></div></div>
+  <div class="cc"><div class="cct">Perfil de madurez IVSO por dimensión</div><div class="cw"><canvas id="rc"></canvas></div></div>
   <div id="d-recs"></div>
   <div class="aic">
     <div class="aih">
@@ -1558,7 +1560,7 @@ img{max-width:100%;height:auto}
   </div>
   <div class="cta-box">
     <div class="cta-title">Revisemos sus resultados juntos</div>
-    <div class="cta-sub" id="cta-text">En una sesión ejecutiva gratuita de 30 minutos le explicamos el significado de cada hallazgo, por qué aplica a su organización y cuales son las acciones concretas para remediarlo. Sin compromiso.</div>
+    <div class="cta-sub" id="cta-text">En una sesión ejecutiva gratuita de 30 minutos le explicamos el significado de cada hallazgo, por qué aplica a su organización y cuáles son las acciones concretas para remediarlo. Sin compromiso.</div>
     <a class="cta-btn" id="cta-link" href="mailto:josedavidalomia@gmail.com">Agendar sesión ejecutiva gratuita &mdash; 30 minutos</a>
     <div class="cta-note">Sin compromiso. Sin costo. Solo resultados.</div>
     <div style="margin-top:14px"><button id="pdf-btn" onclick="genPDF()" style="background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif">Descargar mi informe (PDF)</button></div>
@@ -1799,7 +1801,7 @@ img{max-width:100%;height:auto}
         <p style="margin-bottom:24px">Sus datos serán utilizados para: (a) responder a su solicitud de información o cotización; (b) entregarle los resultados de su diagnóstico IVSO; (c) contactarle para presentar propuestas de servicios de consultoría en riesgo psicosocial, SST y bienestar organizacional; (d) gestionar la relación comercial y contractual si esta se materializa; y (e) llevar registros internos de prospectos comerciales. Sus datos no serán vendidos, arrendados ni cedidos a terceros con fines comerciales.</p>
 
         <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:19px;color:var(--M);margin:0 0 12px">4. Encargados y transferencias</h2>
-        <p style="margin-bottom:24px">Para la operación técnica de este sitio empleamos proveedores que actúan como encargados del tratamiento: servicios de envío de formularios y Google LLC (almacenamiento en Google Sheets/Workspace), los cuales pueden implicar transmisión internacional de datos a países con niveles adecuados de protección conforme a la normatividad colombiana.</p>
+        <p style="margin-bottom:24px">Para la operación técnica de este sitio empleamos proveedores que actúan como encargados del tratamiento: servicios de envío de formularios y Google LLC (almacenamiento en Google Sheets/Workspace), los cuáles pueden implicar transmisión internacional de datos a países con niveles adecuados de protección conforme a la normatividad colombiana.</p>
 
         <h2 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:19px;color:var(--M);margin:0 0 12px">5. Derechos del titular</h2>
         <p style="margin-bottom:24px">Como titular de los datos usted tiene derecho a: conocer, actualizar y rectificar sus datos personales; solicitar prueba de la autorización otorgada; ser informado sobre el uso dado a sus datos; presentar quejas ante la Superintendencia de Industria y Comercio (SIC) por infracciones al régimen de protección de datos; revocar la autorización y/o solicitar la supresión de sus datos cuando no exista un deber legal o contractual que lo impida; y acceder gratuitamente a sus datos.</p>
@@ -2516,25 +2518,15 @@ function showRes() {
     else if (s.pct >= 70) str.push(d.n);
     else opp.push(d.n);
   });
-  document.getElementById('dins').innerHTML =
-    '<div class="ic"><div class="ict">Riesgos críticos</div>' +
-    (risks.map(function(r) { return '<div class="ii"><div class="idot" style="background:#EF4444"></div>' + r + '</div>'; }).join('') || "<div class='ii'>Sin riesgos críticos</div>") + '</div>' +
-    '<div class="ic"><div class="ict">Fortalezas</div>' +
-    (str.map(function(s) { return '<div class="ii"><div class="idot" style="background:#22C55E"></div>' + s + '</div>'; }).join('') || "<div class='ii'>En construcción</div>") + '</div>' +
-    '<div class="ic icf"><div class="ict">Oportunidades de mejora</div>' +
-    (opp.map(function(o) { return '<div class="ii"><div class="idot" style="background:#EAB308"></div>' + o + '</div>'; }).join('') || "<div class='ii'>--</div>") + '</div>';
+  var insHtml = '';
+  if (str.length) insHtml += '<div class="ic"><div class="ict">Fortalezas</div>' +
+    str.map(function(x){ return '<div class="ii"><div class="idot" style="background:#22C55E"></div>' + x + '</div>'; }).join('') + '</div>';
+  if (opp.length) insHtml += '<div class="ic"><div class="ict">Aspectos a mejorar</div>' +
+    opp.map(function(x){ return '<div class="ii"><div class="idot" style="background:#EAB308"></div>' + x + '</div>'; }).join('') + '</div>';
+  if (risks.length) insHtml += '<div class="ic icf"><div class="ict">Áreas de oportunidad</div>' +
+    risks.map(function(x){ return '<div class="ii"><div class="idot" style="background:#0E7C7B"></div>' + x + '</div>'; }).join('') + '</div>';
+  document.getElementById('dins').innerHTML = insHtml;
 
-  /* Snapshot para el PDF descargable */
-  try {
-    window.__ivsoPDF = {
-      emp: emp, fecha: fecha, ivso: ivso, lvl: lv.lbl, lvlColor: lv.cl,
-      sect: document.getElementById('fse').value || '',
-      n: document.getElementById('fn').value || '',
-      contacto: document.getElementById('fco') ? (document.getElementById('fco').value||'') : '',
-      dims: all.map(function(d){ return {n: d.n, pct: dsc(d).pct}; }),
-      risks: risks.slice(), str: str.slice(), opp: opp.slice()
-    };
-  } catch(e) {}
 
   /* Benchmark */
   var benchData = [
@@ -2549,6 +2541,19 @@ function showRes() {
       '<div class="brt"><div class="brf" style="width:' + b.v + '%;background:' + b.c + '"></div></div>' +
       '<span class="brv">' + b.v + '</span></div>';
   }).join('');
+
+  /* Snapshot para el PDF descargable */
+  try {
+    window.__ivsoPDF = {
+      emp: emp, fecha: fecha, ivso: ivso, lvl: lv.lbl, lvlColor: lv.cl,
+      sect: document.getElementById('fse').value || '',
+      n: document.getElementById('fn').value || '',
+      contacto: document.getElementById('fco') ? (document.getElementById('fco').value||'') : '',
+      dims: all.map(function(d){ return {n: d.n, pct: dsc(d).pct}; }),
+      risks: risks.slice(), str: str.slice(), opp: opp.slice(),
+      bench: benchData.map(function(b){ return {l:b.l, v:b.v, c:b.c, h:b.h}; })
+    };
+  } catch(e) {}
 
   /* Radar chart */
   /* Inline radar - no Chart.js needed */
@@ -2680,22 +2685,29 @@ function buildRpt(ivso, lv, lc, recs, aiText, fecha) {
 ================================================================ */
 /* Análisis ejecutivo generado localmente (respaldo sin IA) */
 function localAnalysis(ivso, lv, risks, str, opp, nc, sveSt, pain, emp, sect, n) {
-  var p1, pF, pM, pC, p5;
-  if (ivso >= 75) {
-    p1 = emp + ' presenta un índice IVSO de ' + ivso + '/100 (' + lv.lbl + '), lo que refleja una gestión del talento con fundamentos solidos en el sector ' + sect + '. Los indicadores de personas actuan hoy como palanca de productividad y no como fuente de costos ocultos para una operación de ' + n + ' colaboradores.';
-  } else if (ivso >= 50) {
-    p1 = emp + ' obtiene un índice IVSO de ' + ivso + '/100 (' + lv.lbl + '). El diagnóstico muestra una base de gestión en construcción: hay dimensiones que ya funcionan como fortalezas y otras donde los factores de personas están generando fugas de valor medibles. El principal desafio reportado (' + pain + ') suele traducirse en sobrecostos de rotación, ausentismo y pérdida de productividad si no se gestiona a tiempo.';
-  } else {
-    p1 = emp + ' registra un índice IVSO de ' + ivso + '/100 (' + lv.lbl + '), un nivel que indica impacto directo y actual sobre los resultados del negocio, con señales asociadas a rotación costosa, incapacidades por estrés y riesgo de conflictos laborales.';
+  var partes = [];
+  /* Apertura positiva: el mérito de dar el primer paso */
+  partes.push('Completar este diagnóstico ya es, en sí mismo, un paso meritorio: la mayoría de las organizaciones del sector ' + sect + ' nunca mide su madurez psicosocial, y ' + emp + ' acaba de hacerlo. El resultado — un índice IVSO de ' + ivso + '/100 (' + lv.lbl + ') — es una fotografía honesta del punto de partida, y contar con ella es exactamente lo que permite avanzar con dirección.');
+  /* Fortalezas (solo si existen) */
+  if (str.length) {
+    partes.push('Fortalezas: ' + str.join(', ') + '. Estas dimensiones ya funcionan bien y están sosteniendo la operación día a día; son la base sobre la cual construir y conviene protegerlas y documentarlas.');
   }
-  pF = 'Fortalezas: ' + (str.length ? str.join(', ') + '. Estas dimensiones están sosteniendo hoy la operación y son la base sobre la cual construir; conviene protegerlas y documentarlas.' : 'el diagnóstico no identifico dimensiones en nivel de fortaleza (70+/100), lo que indica que la gestión actual depende mas de las personas que de un sistema.');
-  pM = 'Aspectos a mejorar: ' + (opp.length ? opp.join(', ') + '. Se encuentran en un nivel intermedio: no representan una emergencia, pero son el terreno donde una intervención bien dirigida genera el mayor retorno en clima, retención y productividad.' : 'no se identificaron dimensiones en rango intermedio; la brecha esta concentrada en los aspectos a corregir.');
-  var legal = (nc && nc !== 'ninguno')
-    ? ' A esto se suma el frente normativo SST, donde existen obligaciones pendientes que exponen a la empresa a sanciones de hasta 500 SMMLV y responsabilidad agravada ante un evento de origen psicosocial; el estado del SVE Psicosocial (' + sveSt + ') es el punto de mayor exposicion.'
-    : ' En el frente normativo SST la empresa muestra un cumplimiento destacable, lo que reduce significativamente su exposicion legal.';
-  pC = 'Aspectos a corregir: ' + (risks.length ? risks.join(', ') + '. Estas dimensiones están en nivel crítico y requieren intervención prioritaria antes de que su costo escale.' : 'no se identificaron dimensiones en nivel crítico.') + legal;
-  p5 = 'La recomendación profesional es revisar estos resultados en una sesión ejecutiva de 30 minutos, sin costo, en la que se explica el significado de cada hallazgo, su origen probable y la ruta de remediación específica para ' + emp + ', con prioridades y tiempos realistas.';
-  return p1 + '\n\n' + pF + '\n\n' + pM + '\n\n' + pC + '\n\n' + p5;
+  /* Aspectos a mejorar (solo si existen) */
+  if (opp.length) {
+    partes.push('Aspectos a mejorar: ' + opp.join(', ') + '. Se encuentran en un nivel intermedio: no representan una urgencia, y son justamente el terreno donde una intervención bien dirigida genera el mayor retorno en clima, retención y productividad.');
+  }
+  /* Áreas de oportunidad (tono neutral) */
+  var ao = '';
+  if (risks.length) {
+    ao = 'Áreas de oportunidad: ' + risks.join(', ') + '. Son las dimensiones con mayor espacio de crecimiento y, bien gestionadas, las que más rápido pueden mover el índice global.';
+  }
+  if (nc && nc !== 'ninguno') {
+    ao += (ao ? ' ' : 'Áreas de oportunidad: ') + 'En el frente normativo SST existen obligaciones pendientes de formalizar; regularizarlas a tiempo protege a la empresa (la normativa contempla sanciones de hasta 500 SMMLV) y convierte el cumplimiento en un sello de seriedad frente a clientes y colaboradores.';
+  }
+  if (ao) partes.push(ao);
+  /* Cierre positivo: el interés por mejorar */
+  partes.push('El interés por mejorar que demuestra ' + emp + ' al realizar este diagnóstico es el mejor predictor de avance: las organizaciones que miden, mejoran. El siguiente paso natural es una sesión ejecutiva de 30 minutos, sin costo, donde revisamos juntos el significado de cada hallazgo y la ruta de acción específica para su realidad, con prioridades y tiempos realistas.');
+  return partes.join('\n\n');
 }
 
 async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
@@ -2721,14 +2733,16 @@ async function callAI(ivso, lv, risks, str, opp, lc, recs, pain, emp, fecha) {
     'Principal desafio de personas: ' + pain,
     'Fecha: ' + fecha,
     '',
-    'REGLA CRÍTICA: NO menciones servicios, productos ni la oferta comercial de Vitalis. El objetivo del texto es que el lector entienda su situación y quiera agendar una reunión para conocer la ruta de solución.',
+    'REGLA CRÍTICA: NO menciones servicios, productos ni la oferta comercial de Vitalis. El objetivo es que el lector entienda su situación y quiera agendar una reunión para conocer la ruta de solución.',
+    'REGLA DE TONO — TÉCNICA DEL SÁNDWICH: abre reconociendo lo meritorio de realizar este primer diagnóstico, presenta lo mejorable en tono neutral y constructivo (nunca alarmista), y cierra en positivo destacando el interés por mejorar que demuestra la empresa.',
+    'REGLA DE ESTRUCTURA CONDICIONAL: si no hay fortalezas identificadas, OMITE por completo ese párrafo (no digas que no hay). Igual con aspectos a mejorar. Usa siempre el término "Áreas de oportunidad" (nunca "aspectos a corregir" ni "riesgos críticos").',
     '',
-    'ESTRUCTURA (5 parrafos cortos, texto corrido, sin encabezados):',
-    'Parrafo 1: Estado general desde los indicadores de personas (impacto en productividad, costos, riesgo).',
-    'Parrafo 2: Fortalezas identificadas y que valor le generan hoy a la empresa.',
-    'Parrafo 3: Aspectos a mejorar (nivel intermedio) y el retorno de intervenirlos a tiempo.',
-    'Parrafo 4: Aspectos a corregir (críticos y legales) con riesgo específico para ESTA empresa (incluye cifras: SMMLV).',
-    'Parrafo 5: Cierra invitando a revisar los resultados en una sesión ejecutiva gratuita de 30 minutos donde se explica cada hallazgo y su ruta de remediación.'
+    'ESTRUCTURA (texto corrido, sin encabezados):',
+    'Párrafo 1: Reconocimiento del paso dado al medirse + lectura del índice como punto de partida.',
+    'Párrafo 2 (solo si hay fortalezas): Fortalezas y el valor que ya generan.',
+    'Párrafo 3 (solo si hay aspectos a mejorar): dimensiones intermedias y el retorno de intervenirlas.',
+    'Párrafo 4: Áreas de oportunidad en tono neutral, incluyendo lo normativo como protección y sello de seriedad (puede citar hasta 500 SMMLV sin dramatismo).',
+    'Párrafo 5: Cierre positivo sobre su interés por mejorar + invitación a la sesión ejecutiva gratuita de 30 minutos.'
   ].join('\n');
 
   var el = document.getElementById('dai');
@@ -2814,16 +2828,16 @@ async function genPDF() {
     doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]); doc.setFont('helvetica','bold'); doc.setFontSize(30);
     var wScore = doc.getTextWidth(String(D.ivso));
     doc.text(String(D.ivso), M+8, y+8);
-    doc.setFontSize(11); doc.setTextColor(GREY[0],GREY[1],GREY[2]); doc.text('/100', M+8+wScore+2.5, y+8);
+    doc.setFontSize(11); doc.setTextColor(GREY[0],GREY[1],GREY[2]); doc.text('/100', M+8+wScore+3.5, y+8);
     doc.setFontSize(12); doc.setTextColor(TEAL[0],TEAL[1],TEAL[2]);
     doc.text('Nivel de madurez: ' + D.lvl, M+45, y+3);
     doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(GREY[0],GREY[1],GREY[2]);
-    doc.text('Escala: 0-44 Crítico  ·  45-69 Moderado  ·  70-100 Optimo', M+45, y+9);
+    doc.text('Escala: 0-44 Crítico  ·  45-69 Moderado  ·  70-100 Óptimo', M+45, y+9);
 
-    /* ── Barras por dimension ── */
+    /* ── Barras por dimensión ── */
     y = 100;
     doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]);
-    doc.text('Resultados por dimension', M, y); y += 7;
+    doc.text('Resultados por dimensión', M, y); y += 7;
     doc.setFontSize(9);
     D.dims.forEach(function(d) {
       var col = d.pct >= 70 ? GREEN : d.pct >= 45 ? GOLD : RED;
@@ -2838,19 +2852,40 @@ async function genPDF() {
 
     /* ── Fortalezas / Mejorar / Corregir ── */
     y += 4;
-    function lista(titulo, items, col, vacio) {
+    function lista(titulo, items, col) {
+      if (y > 240) { doc.addPage(); y = 24; }
       doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(col[0],col[1],col[2]);
       doc.text(titulo, M, y); y += 5.5;
       doc.setFont('helvetica','normal'); doc.setFontSize(9.5); doc.setTextColor(55,65,81);
-      (items.length ? items : [vacio]).forEach(function(it) {
+      items.forEach(function(it) {
         doc.setFillColor(col[0],col[1],col[2]); doc.circle(M+1.5, y-1.2, 1, 'F');
         doc.text(it, M+5, y); y += 5.5;
       });
       y += 3;
     }
-    lista('Fortalezas', D.str, GREEN, 'En construcción');
-    lista('Aspectos a mejorar', D.opp, GOLD, 'Sin dimensiones en rango intermedio');
-    lista('Aspectos a corregir', D.risks, RED, 'Sin dimensiones en nivel crítico');
+    if (D.str.length) lista('Fortalezas', D.str, GREEN);
+    if (D.opp.length) lista('Aspectos a mejorar', D.opp, GOLD);
+    if (D.risks.length) lista('Áreas de oportunidad', D.risks, TEAL);
+
+    /* ── Benchmark sectorial ── */
+    if (D.bench && D.bench.length) {
+      if (y > 225) { doc.addPage(); y = 24; }
+      y += 2;
+      doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]);
+      doc.text('Benchmark sectorial', M, y); y += 7;
+      doc.setFontSize(9);
+      D.bench.forEach(function(b) {
+        var col = b.h ? TEAL : [148,163,184];
+        doc.setFont('helvetica', b.h ? 'bold' : 'normal');
+        doc.setTextColor(b.h ? TEAL[0] : 71, b.h ? TEAL[1] : 85, b.h ? TEAL[2] : 105);
+        doc.text(b.l, M, y+3.5);
+        doc.setFillColor(229,231,235); doc.roundedRect(M+58, y, 94, 4.5, 2, 2, 'F');
+        doc.setFillColor(col[0],col[1],col[2]); if (b.v>2) doc.roundedRect(M+58, y, Math.max(4.5, 94*b.v/100), 4.5, 2, 2, 'F');
+        doc.setFont('helvetica','bold'); doc.setTextColor(col[0],col[1],col[2]);
+        doc.text(String(b.v), M+156, y+3.5);
+        y += 8.5;
+      });
+    }
 
     /* ── Página 2: análisis + invitación ── */
     doc.addPage();
@@ -2858,6 +2893,20 @@ async function genPDF() {
     doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
     doc.text('Análisis ejecutivo — ' + D.emp, M, 10);
     y = 28;
+
+    /* ── Radar de madurez por dimensión ── */
+    try {
+      var rc = document.getElementById('rc');
+      if (rc && rc.width) {
+        var rimg = rc.toDataURL('image/png');
+        var rw = 118, rh = rw * (rc.height / rc.width);
+        doc.setFont('helvetica','bold'); doc.setFontSize(12); doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]);
+        doc.text('Perfil de madurez por dimensión', M, y); y += 4;
+        doc.addImage(rimg, 'PNG', (W-rw)/2, y, rw, rh);
+        y += rh + 9;
+      }
+    } catch(e) {}
+
     var aiEl = document.querySelector('#dai .abody');
     var análisis = aiEl ? aiEl.innerText : 'Análisis no disponible.';
     doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(31,41,55);
