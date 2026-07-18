@@ -518,12 +518,14 @@ img{max-width:100%;height:auto}
 .ivso-wrap .rpt-title {font-size:12px;font-weight:700;color:#6B7280;margin-bottom:10px}
 .ivso-wrap .rpt-box{display:none}
 .ivso-wrap .rpt-pre {font-size:11.5px;font-family:monospace;white-space:pre-wrap;color:#1F2937;line-height:1.7;max-height:300px;overflow-y:auto}
-.ivso-wrap .crmc {background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px;margin-bottom:12px}
+.ivso-wrap .crmc{display:none}
+.ivso-wrap .crmc-off {background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px;margin-bottom:12px}
 .ivso-wrap .crmt {font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px}
 .ivso-wrap .crmok {background:#DCFCE7;color:#166534;border:1px solid #86EFAC;border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px}
 .ivso-wrap .crmpd {background:#FEF9C3;color:#854D0E;border:1px solid #FDE047;border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px}
 .ivso-wrap .crmd {background:#F9FAFB;border-radius:8px;border:1px solid #E5E7EB;padding:12px;font-size:11px;font-family:monospace;white-space:pre-wrap;max-height:200px;overflow-y:auto;margin-top:8px}
-.ivso-wrap .ab {display:flex;gap:10px;flex-wrap:wrap}
+.ivso-wrap .ab{display:none}
+.ivso-wrap .ab-off {display:flex;gap:10px;flex-wrap:wrap}
 .ivso-wrap .ab2 {flex:1;min-width:140px;padding:12px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;text-align:center;border:1.5px solid #D1D5DB;background:#fff;transition:.15s}
 .ivso-wrap .ab2:hover {opacity:.85}
 .ivso-wrap .spin-r {display:flex;align-items:center;gap:10px;color:#6B7280;font-size:13px}
@@ -2810,8 +2812,9 @@ async function genPDF() {
     y = 66;
     doc.setFillColor(LIGHT[0],LIGHT[1],LIGHT[2]); doc.roundedRect(M,y-8,cw,26,3,3,'F');
     doc.setTextColor(NAVY[0],NAVY[1],NAVY[2]); doc.setFont('helvetica','bold'); doc.setFontSize(30);
+    var wScore = doc.getTextWidth(String(D.ivso));
     doc.text(String(D.ivso), M+8, y+8);
-    doc.setFontSize(11); doc.setTextColor(GREY[0],GREY[1],GREY[2]); doc.text('/100', M+8+doc.getTextWidth(String(D.ivso))*1.05+3, y+8);
+    doc.setFontSize(11); doc.setTextColor(GREY[0],GREY[1],GREY[2]); doc.text('/100', M+8+wScore+2.5, y+8);
     doc.setFontSize(12); doc.setTextColor(TEAL[0],TEAL[1],TEAL[2]);
     doc.text('Nivel de madurez: ' + D.lvl, M+45, y+3);
     doc.setFontSize(8.5); doc.setFont('helvetica','normal'); doc.setTextColor(GREY[0],GREY[1],GREY[2]);
@@ -2892,7 +2895,7 @@ async function genPDF() {
    (ver archivo de instrucciones) para que cada diagnóstico se registre
    AUTOMATICAMENTE en la base de prospectos de Google Sheets.
    Mientras este vacia, el registro será manual (botones Generar/Copiar). ═══ */
-var SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwCzJfJqixexsT9no4gVmSRDXU7t_I6GA1WX0_dkNFLs_n-CTYRNYjj-6NbgXIHH-cocQ/exec';
+var SHEET_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwTN6QY-KhH59krPqJx9bq7UT4w_wUb5Oc0jdgc33oJ291bNLET1jMx0ymV5tUr_eXJ2w/exec';
 
 function buildCRMObj() {
   var ivso = calcIVSO();
@@ -2951,7 +2954,7 @@ function sendCRMToSheet(crm) {
     if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto enviado a tu correo (' + (crm['Empresa']||'-') + '). El registro en Google Sheets aún no esta configurado.'; }
     return;
   }
-  if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='Registrando automaticamente en la base de prospectos...'; }
+  if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='Registrando automáticamente en la base de prospectos...'; }
   try {
     fetch(SHEET_WEBAPP_URL, {
       method: 'POST',
@@ -2959,12 +2962,12 @@ function sendCRMToSheet(crm) {
       headers: {'Content-Type': 'text/plain;charset=utf-8'},
       body: JSON.stringify(Object.assign({}, crm, {'Informe completo': (typeof rptFull==='string'? rptFull : '')}))
     }).then(function() {
-      if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto registrado automaticamente en Google Sheets (' + crm['Empresa'] + ').'; }
+      if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto registrado automáticamente en Google Sheets (' + crm['Empresa'] + ').'; }
     }).catch(function() {
-      if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automaticamente. Usa "Copiar datos CRM" como respaldo.'; }
+      if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automáticamente. Usa "Copiar datos CRM" como respaldo.'; }
     });
   } catch(e) {
-    if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automaticamente. Usa "Copiar datos CRM" como respaldo.'; }
+    if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automáticamente. Usa "Copiar datos CRM" como respaldo.'; }
   }
 }
 
