@@ -203,6 +203,37 @@ button{font-family:inherit}
 .addon-nm{font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;color:var(--M);margin-bottom:5px}
 .addon-p{font-size:12.5px;color:var(--gr);line-height:1.6}
 
+
+/* ═══════ PLANES ═══════ */
+.planes-sec{margin-top:56px}
+.planes-eyebrow{text-align:center;font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--T);margin-bottom:10px}
+.planes-title{text-align:center;font-family:'Montserrat',sans-serif;font-weight:800;font-size:clamp(20px,3vw,28px);color:var(--M);margin-bottom:34px}
+.planes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+@media(max-width:1024px){.planes-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+.pl-card{position:relative;background:#fff;border:1px solid var(--bd);border-radius:16px;padding:34px 30px;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(13,27,42,.06)}
+.pl-dark{background:var(--M);border-color:var(--M);box-shadow:0 14px 40px rgba(13,27,42,.28)}
+.pl-badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--O);color:var(--M);font-family:'Montserrat',sans-serif;font-weight:800;font-size:11px;letter-spacing:2px;padding:8px 22px;border-radius:999px;white-space:nowrap}
+.pl-name{font-family:'Montserrat',sans-serif;font-weight:800;font-size:22px;letter-spacing:1.5px;color:#1A4B7C;margin-bottom:12px}
+.pl-dark .pl-name{color:var(--O)}
+.pl-tag{font-size:14px;color:var(--dg);line-height:1.6;margin-bottom:18px;min-height:44px}
+.pl-dark .pl-tag{color:rgba(255,255,255,.82)}
+.pl-price{margin-bottom:6px}
+.pl-desde{font-size:16px;color:var(--gr);margin-right:8px}
+.pl-dark .pl-desde{color:rgba(255,255,255,.6)}
+.pl-val{font-family:'Montserrat',sans-serif;font-weight:900;font-size:34px;color:var(--M)}
+.pl-dark .pl-val{color:#fff}
+.pl-cop{font-size:12px;color:var(--gr);margin-bottom:18px}
+.pl-dark .pl-cop{color:rgba(255,255,255,.55)}
+.pl-sep{border-top:1px solid var(--bd);margin-bottom:18px}
+.pl-dark .pl-sep{border-color:rgba(255,255,255,.18)}
+.pl-feat{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--dg);margin-bottom:13px;line-height:1.5}
+.pl-dark .pl-feat{color:rgba(255,255,255,.9)}
+.pl-ck{width:19px;height:19px;border-radius:50%;background:#22C55E;color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pl-dark .pl-ck{background:var(--O);color:var(--M)}
+.pl-cta{margin-top:auto;padding-top:14px}
+.pl-cta a{display:block;text-align:center;padding:13px;border-radius:9px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;text-decoration:none;border:1.5px solid #1A4B7C;color:#1A4B7C}
+.pl-dark .pl-cta a{background:var(--O);border-color:var(--O);color:var(--M)}
+
 /* ═══════ RESET PAGE ═══════ */
 .info-box{background:#fff;border-radius:13px;padding:24px;border:1px solid var(--bd);margin-bottom:14px}
 .info-box-t{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--gr);margin-bottom:10px}
@@ -711,7 +742,7 @@ img{max-width:100%;height:auto}
         </div>
         <div style="display:flex;flex-direction:column;gap:13px">
           <div class="hcard"><div class="hcard-ic">📊</div><div class="hcard-t">Diagnóstico Psicosocial Certificado</div><div class="hcard-p">Batería Res. 2764/2022 con informe técnico, dashboard ejecutivo y hoja de ruta priorizada.</div></div>
-          <div class="hcard star"><div class="hcard-ic">🔄</div><div class="hcard-t">RESET Empresarial®</div><div class="hcard-p">Programa de transformación en 3 meses. 6 módulos con evidencia científica y resultados medibles.</div></div>
+          <div class="hcard star"><div class="hcard-ic">🔄</div><div class="hcard-t">Evolución</div><div class="hcard-p">Programa de transformación en 3 meses. 6 módulos con evidencia científica y resultados medibles.</div></div>
           <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.22);border-radius:28px;padding:9px 16px">
             <span>⚖️</span><span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10.5px;color:var(--O)">Acreditado · Res. 2764/2022 · Decreto 1072/2015</span>
           </div>
@@ -808,8 +839,8 @@ img{max-width:100%;height:auto}
         <div class="srv star">
           <div class="srv-tag">⭐ Más solicitado</div>
           <div class="srv-ic">🔄</div><div class="srv-lv">Nivel 2 — Transformación</div>
-          <div class="srv-nm">RESET Empresarial®</div>
-          <div class="srv-desc">Programa de 3 meses con 6 módulos basados en evidencia científica. Diseñado para intervenir los factores de riesgo identificados con resultados medibles.</div>
+          <div class="srv-nm">Evolución</div>
+          <div class="srv-desc">Programa de transformación de 3 meses basado en RESET Empresarial®: 6 módulos con evidencia científica para intervenir los factores de riesgo identificados, con resultados medibles.</div>
           <div class="srv-list">
             <div class="srv-li"><div class="srv-ck">✓</div>6 módulos progresivos: Estrés · Autocuidado · Comunicación · IE · Equipo · Burnout</div>
             <div class="srv-li"><div class="srv-ck">✓</div>Sesiones grupales facilitadas (hasta 30 participantes)</div>
@@ -822,17 +853,29 @@ img{max-width:100%;height:auto}
         <div class="srv">
           <div class="srv-tag" style="color:var(--O)">Premium</div>
           <div class="srv-ic">🏆</div><div class="srv-lv">Nivel 3 — Premium</div>
-          <div class="srv-nm">Programa Integral Vitalis</div>
-          <div class="srv-desc">Transformación organizacional 360°. El paquete más completo: diagnóstico, RESET®, formación de líderes, acompañamiento mensual y documentación normativa total.</div>
+          <div class="srv-nm">Trascendencia</div>
+          <div class="srv-desc">Transformación organizacional 360°. El plan más completo: diagnóstico, programa Evolución, formación de líderes, acompañamiento mensual y documentación normativa total.</div>
           <div class="srv-list">
-            <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>Diagnóstico completo + Programa RESET Empresarial®</div>
+            <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>Diagnóstico completo + Programa Evolución (RESET®)</div>
             <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>Formación de líderes en gestión del bienestar</div>
             <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>Acompañamiento mensual durante 6 meses</div>
             <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>Comité Ejecutivo de Bienestar</div>
             <div class="srv-li"><div class="srv-ck" style="background:rgba(201,168,76,.15);color:var(--O)">✓</div>PVE Psicosocial documentado y registrado</div>
           </div>
-          <a class="srv-lnk" href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Cotizaci%C3%B3n%20Programa%20Integral&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20Programa%20Integral%20Vitalis.%0A%0AMi%20empresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ATel%C3%A9fono%3A%20" style="color:var(--O)">Cotización personalizada →</a>
+          <a class="srv-lnk" href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Plan%20Trascendencia&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20Trascendencia.%0A%0AMi%20empresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ATel%C3%A9fono%3A%20" style="color:var(--O)">Cotización personalizada →</a>
         </div>
+      </div>
+
+
+      <div class="planes-sec">
+        <p class="planes-eyebrow">Planes de acompañamiento</p>
+        <h2 class="planes-title">Una ruta para cada momento de su organización</h2>
+        <div class="planes-grid">
+          <div class="pl-card"><div class="pl-name">ESENCIAL</div><div class="pl-tag">Inicie la gestión estructurada del riesgo psicosocial.</div><div class="pl-price"><span class="pl-desde">Desde</span><span class="pl-val">$1,5 M</span></div><div class="pl-cop">Inversión mensual (COP)</div><div class="pl-sep"></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Evaluación psicosocial</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Programa de Vigilancia Epidemiológica Psicosocial</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Primeros Auxilios Psicológicos</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Acompañamiento mensual</div></div><div class="pl-cta"><a href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Plan%20ESENCIAL&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20ESENCIAL.%0A%0AMi%20empresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ACiudad%3A%20%0ATel%C3%A9fono%3A%20">Solicitar este plan →</a></div></div>
+          <div class="pl-card pl-dark"><div class="pl-badge">MÁS ELEGIDO</div><div class="pl-name">EVOLUCIÓN</div><div class="pl-tag">Del cumplimiento a la cultura de prevención.</div><div class="pl-price"><span class="pl-desde">Desde</span><span class="pl-val">$2,4 M</span></div><div class="pl-cop">Inversión mensual (COP)</div><div class="pl-sep"></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Todo lo incluido en Esencial</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>5 talleres estratégicos</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Material de capacitación</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Informe consolidado</div></div><div class="pl-cta"><a href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Plan%20EVOLUCI%C3%93N&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20EVOLUCI%C3%93N.%0A%0AMi%20empresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ACiudad%3A%20%0ATel%C3%A9fono%3A%20">Elegir Evolución →</a></div></div>
+          <div class="pl-card"><div class="pl-name">TRASCENDENCIA</div><div class="pl-tag">Máximo impacto para organizaciones de alto rendimiento.</div><div class="pl-price"><span class="pl-desde">Desde</span><span class="pl-val">$3,3 M</span></div><div class="pl-cop">Inversión mensual (COP)</div><div class="pl-sep"></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Todo lo incluido en Evolución</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>5 talleres personalizados</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>4 sesiones de coaching para líderes</div></div><div class="pl-feat"><div class="pl-ck">✓</div><div>Beneficios para familia</div></div><div class="pl-cta"><a href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Plan%20TRASCENDENCIA&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20TRASCENDENCIA.%0A%0AMi%20empresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ACiudad%3A%20%0ATel%C3%A9fono%3A%20">Solicitar este plan →</a></div></div>
+        </div>
+        <p style="text-align:center;font-size:12px;color:var(--gr);margin-top:18px">Valores de referencia según el tamaño de la organización. Cotización formal tras la reunión diagnóstica gratuita.</p>
       </div>
 
       <div style="margin-top:20px;padding:32px;background:var(--S);border-radius:14px;border:1px solid var(--bd)">
@@ -941,7 +984,7 @@ img{max-width:100%;height:auto}
             <div class="step"><div class="step-n">5</div><div class="step-ln"></div><div class="step-body"><div class="step-t">Entrega de resultados</div><div class="step-p">Informe técnico ejecutivo, dashboard de indicadores y presentación ante gerencia.</div></div></div>
             <div class="step"><div class="step-n">6</div><div class="step-body"><div class="step-t">Documentación normativa completa</div><div class="step-p">Todo documentado y listo para el Ministerio del Trabajo, inspecciones y auditorías SST.</div></div></div>
           </div>
-          <div style="margin-top:36px"><a class="btn btn-p" href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Programa%20Integral%20Vitalis&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20Programa%20Integral%20Vitalis.%0A%0AEmpresa%3A%20%0ANro.%20trabajadores%3A%20%0ATelefono%3A%20">Comenzar el proceso →</a></div>
+          <div style="margin-top:36px"><a class="btn btn-p" href="mailto:josedavidalomia@gmail.com?subject=Solicitud%20Plan%20Trascendencia&body=Hola%20Jose%20David%2C%0A%0AEstoy%20interesado%20en%20el%20plan%20Trascendencia.%0A%0AEmpresa%3A%20%0ANro.%20trabajadores%3A%20%0ATelefono%3A%20">Comenzar el proceso →</a></div>
         </div>
         <div>
           <div class="res-box">
@@ -1829,7 +1872,7 @@ img{max-width:100%;height:auto}
       <div><h4 style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11.5px;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px">Servicios</h4>
         <div style="display:flex;flex-direction:column;gap:9px">
           <button onclick="goPage('servicios')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">Diagnóstico Psicosocial</button>
-          <button onclick="goPage('reset')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">RESET Empresarial®</button>
+          <button onclick="goPage('reset')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">Programa Evolución</button>
           <button onclick="goPage('talleres')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">Talleres de Bienestar</button>
           <button onclick="goPage('pve')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">PVE Psicosocial</button>
           <button onclick="goPage('coaching')" style="background:none;border:none;color:rgba(255,255,255,.58);text-align:left;cursor:pointer;padding:0;font-family:'Open Sans',sans-serif;font-size:12.5px">Coaching de Líderes</button>
