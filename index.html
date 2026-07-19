@@ -2806,7 +2806,7 @@ async function genPDF() {
     doc.setFillColor(NAVY[0],NAVY[1],NAVY[2]); doc.rect(0,0,W,52,'F');
     doc.setFillColor(TEAL[0],TEAL[1],TEAL[2]); doc.rect(0,52,W,1.6,'F');
     var lg = _logoPNG();
-    if (lg) { doc.setFillColor(255,255,255); doc.roundedRect(M,10,42,17,2,2,'F'); doc.addImage(lg,'PNG',M+3,12,36,13.5); }
+    if (lg) { doc.addImage(lg,'PNG',M,10,42,16); }
     doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
     doc.text('Índice Vitalis de Madurez', M+50, 18);
     doc.text('Psicosocial y Cumplimiento SST', M+50, 25);
