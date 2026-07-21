@@ -206,6 +206,31 @@ button{font-family:inherit}
 
 /* ═══════ PLANES ═══════ */
 .planes-sec{margin-top:56px}
+
+/* ═══════ BLOG ═══════ */
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.blog-grid{grid-template-columns:1fr}}
+.blog-card{background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(13,27,42,.06);transition:box-shadow .18s;cursor:pointer;padding:24px}
+.blog-card:hover{box-shadow:0 10px 32px rgba(13,27,42,.13)}
+.blog-tag-pill{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+.blog-title-t{font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:var(--M);line-height:1.35;margin-bottom:8px}
+.blog-excerpt-t{font-size:13px;color:var(--gr);line-height:1.65;flex:1}
+.blog-meta-t{font-size:11px;color:var(--gr);margin-top:14px;padding-top:12px;border-top:1px solid var(--bd);display:flex;gap:12px;flex-wrap:wrap}
+.blog-art{display:none;background:#fff;padding:48px 0 72px}
+.blog-art.open{display:block}
+.blog-art-inner{max-width:780px;margin:0 auto;padding:0 24px}
+.blog-art h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(20px,3.5vw,30px);color:var(--M);line-height:1.2;margin-bottom:14px}
+.blog-art h2{font-family:'Montserrat',sans-serif;font-weight:800;font-size:18px;color:var(--B);margin:30px 0 10px}
+.blog-art p{font-size:14.5px;color:var(--dg);line-height:1.8;margin-bottom:15px}
+.blog-art ul{padding-left:22px;margin-bottom:15px}
+.blog-art li{font-size:14px;color:var(--dg);line-height:1.75;margin-bottom:6px}
+.blog-art strong{color:var(--M)}
+.blog-art .art-meta{font-size:12px;color:var(--gr);margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--bd)}
+.blog-art .art-cta{background:var(--M);border-radius:12px;padding:26px 30px;text-align:center;margin-top:38px}
+.blog-art .art-cta h3{font-family:'Montserrat',sans-serif;font-weight:800;font-size:17px;color:#fff;margin-bottom:8px}
+.blog-art .art-cta p{color:rgba(255,255,255,.8);font-size:13px;margin-bottom:14px}
+.blog-back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--T);font-weight:700;cursor:pointer;margin-bottom:26px;background:none;border:none;padding:0}
 .plan-tabla-wrap{margin-top:44px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .plan-tabla{width:100%;min-width:640px;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 24px rgba(13,27,42,.06);border:1px solid var(--bd)}
 .plan-tabla th{font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;padding:16px 14px;text-align:center;background:#fff;border-bottom:2px solid var(--bd)}
@@ -592,7 +617,7 @@ img{max-width:100%;height:auto}
   'use strict';
   var PAGES = ['inicio','servicios','reset','metodo','nosotros',
                'talleres','pve','coaching','acompanamiento','bateria',
-               'normativa','ivso','contacto','datos'];
+               'normativa','ivso','contacto','datos','blog'];
 
   function showPage(id) {
     if (!id || PAGES.indexOf(id) === -1) id = 'inicio';
@@ -707,6 +732,7 @@ img{max-width:100%;height:auto}
         <button onclick="goPage('bateria');closeDropdown()">🔬 Batería Psicosocial</button>
         <button onclick="goPage('normativa');closeDropdown()">⚖️ Normativa SST</button>
         <button onclick="goPage('ivso');closeDropdown()">📊 Índice IVSO</button>
+        <button onclick="goPage('blog');closeDropdown()">📝 Blog SST</button>
       </div>
     </div>
     <button class="nav-cta" onclick="goPage('contacto')">Reunión gratuita</button>
@@ -1239,7 +1265,8 @@ img{max-width:100%;height:auto}
   <div class="wrap">
     <span class="ey ey-lt">Consultoría Continua</span>
     <h2 class="h2 h2-lt">Acompañamiento SST Mensual</h2>
-    <p class="lead lead-lt">Diseñado para empresas de <strong style="color:#C9A84C">10 a 200 trabajadores</strong> que necesitan gestión SST de alto nivel sin el costo de un área interna. Cumplimiento continuo, asesoría especializada y tranquilidad ante el Ministerio del Trabajo.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;margin-bottom:6px"><span style="background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.5);color:#C9A84C;font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;padding:6px 16px;border-radius:999px">✓ 10 a 200 trabajadores</span><span style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:999px">Sin costos de nómina</span><span style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:13px;font-weight:600;padding:6px 16px;border-radius:999px">Especialista certificado</span></div>
+    <p class="lead lead-lt" style="margin-top:14px">Diseñado para empresas de <strong style="color:#C9A84C">10 a 200 trabajadores</strong> que necesitan gestión SST de alto nivel sin el costo de un área interna. Cumplimiento continuo, asesoría especializada y tranquilidad ante el Ministerio del Trabajo.</p>
   </div>
 </div>
   <div class="pg-nav-bar"><div class="wrap"><button class="pg-nav-pill" type="button" onclick="goPage('inicio')">Inicio</button><button class="pg-nav-pill" type="button" onclick="goPage('servicios')">Servicios</button><button class="pg-nav-pill" type="button" onclick="goPage('reset')">Evolución</button><button class="pg-nav-pill" type="button" onclick="goPage('metodo')">Metodología</button><button class="pg-nav-pill" type="button" onclick="goPage('nosotros')">Nosotros</button><button class="pg-nav-pill" type="button" onclick="goPage('talleres')">Talleres</button><button class="pg-nav-pill" type="button" onclick="goPage('pve')">PVE</button><button class="pg-nav-pill" type="button" onclick="goPage('coaching')">Coaching</button><button class="pg-nav-pill" type="button" onclick="goPage('bateria')">Batería</button><button class="pg-nav-pill" type="button" onclick="goPage('normativa')">Normativa</button><button class="pg-nav-pill" type="button" onclick="goPage('contacto')">Contacto</button><button class="pg-nav-pill" type="button" onclick="goPage('ivso')">IVSO</button></div></div>
@@ -1730,6 +1757,10 @@ img{max-width:100%;height:auto}
               </div>
             </div>
             
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px">
+              <a href="https://www.linkedin.com/in/vitalisempresarial" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:#0A66C2;color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;text-decoration:none"><strong>in</strong> LinkedIn</a>
+              <a href="https://www.instagram.com/vitalisempresarial/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;text-decoration:none">📷 Instagram</a>
+            </div>
             <div style="display:flex;gap:14px;align-items:flex-start">
               <div style="width:44px;height:44px;border-radius:10px;background:#25D366;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px">💬</div>
               <div>
@@ -1928,12 +1959,124 @@ img{max-width:100%;height:auto}
   <div class="footer-slot"></div>
 </div>
 
+
+<!-- ═══ BLOG ═══ -->
+<div class="page" id="pg-blog">
+  <div class="pg-hdr pg-hdr-dark"><div class="wrap"><span class="ey ey-lt">Contenido de autoridad</span><h2 class="h2 h2-lt">Recursos sobre Riesgo Psicosocial<br>y SST en Colombia</h2><p class="lead lead-lt">Artículos técnicos escritos por psicólogo especialista en SST, con base normativa actualizada (Res. 2764/2022 · Decreto 728/2025).</p></div></div>
+  <div class="pg-nav-bar"><div style="display:flex;flex-wrap:nowrap;gap:6px;padding:8px 20px;width:max-content;min-width:100%"><button class="pg-nav-pill" onclick="goPage('inicio')">Inicio</button><button class="pg-nav-pill" onclick="goPage('servicios')">Servicios</button><button class="pg-nav-pill" onclick="goPage('normativa')">Normativa</button><button class="pg-nav-pill" onclick="goPage('ivso')">Diagnóstico IVSO</button><button class="pg-nav-pill" onclick="goPage('contacto')">Contacto</button></div></div>
+  <div style="background:var(--S);padding:52px 0 72px"><div class="wrap"><div class="blog-grid"><div class="blog-card" onclick="openBlog('riesgo-psicosocial-colombia')"><span class="blog-tag-pill" style="color:#1A4B7C;background:#EFF4FF">Normativa SST</span><div class="blog-title-t">Riesgo Psicosocial en Colombia: Qué es, Qué Exige la Ley y Cómo Actuar</div><div class="blog-excerpt-t">La Resolución 2764/2022 obliga a toda empresa con contratos laborales a evaluar el riesgo psicosocial. Qué mide la batería, qué dice la norma y 5 pasos para implementarla.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 8 min</span></div></div><div class="blog-card" onclick="openBlog('sobrecarga-laboral-riesgo-psicosocial')"><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><div class="blog-title-t">Sobrecarga y Ritmo de Trabajo: Cuando el Exceso se Vuelve Riesgo Psicosocial</div><div class="blog-excerpt-t">Plazos imposibles, multitareas continuas y jornadas que no terminan. La sobrecarga laboral es uno de los factores con mayor impacto en la batería psicosocial colombiana.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 7 min</span></div></div><div class="blog-card" onclick="openBlog('falta-de-control-autonomia-laboral')"><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><div class="blog-title-t">Falta de Control en el Trabajo: Por Qué la Autonomía es el Riesgo que Más Cuesta Ignorar</div><div class="blog-excerpt-t">No es la carga lo que enferma: es la carga sin margen de decisión. El modelo Demanda-Control lo confirma. Así lo mide la batería y así se interviene.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 7 min</span></div></div><div class="blog-card" onclick="openBlog('apt-bateria-vs-determinacion-origen')"><span class="blog-tag-pill" style="color:#7C3AED;background:#F5F0FF">Técnico — SST</span><div class="blog-title-t">Análisis de Puesto de Trabajo: Batería vs. Determinación de Origen — La Diferencia que Toda Empresa Debe Conocer</div><div class="blog-excerpt-t">Mismo nombre, propósitos completamente distintos. Confundirlos puede costarle un proceso de calificación de origen fallido o un plan de intervención que no atacó la causa real.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 9 min</span></div></div><div class="blog-card" onclick="openBlog('bateria-psicosocial-cali-guia')"><span class="blog-tag-pill" style="color:#2EAF7D;background:#EDFBF4">Guía Práctica</span><div class="blog-title-t">Batería de Riesgo Psicosocial en Cali: Guía Práctica para Empresas del Valle del Cauca</div><div class="blog-excerpt-t">¿Su empresa en Cali ya aplicó la batería psicosocial? Sepa qué exige la Res. 2764/2022, cómo se aplica correctamente y qué sigue después del informe.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 6 min</span></div></div></div></div></div>
+<div class="blog-art" id="art-riesgo-psicosocial-colombia"><div class="blog-art-inner"><button class="blog-back" onclick="closeBlog()">← Volver al blog</button><span class="blog-tag-pill" style="color:#1A4B7C;background:#EFF4FF">Normativa SST</span><h1>Riesgo Psicosocial en Colombia: Qué es, Qué Exige la Ley y Cómo Actuar</h1><div class="art-meta">Jose David Alomía G. &nbsp;·&nbsp; Julio 2026 &nbsp;·&nbsp; 8 min de lectura</div><h2>¿Qué es el riesgo psicosocial en el trabajo?</h2>
+<p>El riesgo psicosocial agrupa todos los factores del entorno laboral que pueden afectar la salud física y mental de los trabajadores. En Colombia, la Resolución 2646/2008 los define como las <strong>condiciones cuya identificación y evaluación muestra efectos negativos en la salud de los trabajadores o en el trabajo</strong>.</p>
+<p>Incluye factores como la sobrecarga de trabajo, la falta de autonomía, las relaciones con jefes y compañeros, la claridad del rol, las demandas emocionales y las condiciones del entorno doméstico. Cuando se acumulan sin gestión, generan ausentismo, rotación costosa e incapacidades por estrés.</p>
+<h2>¿Qué exige la normativa colombiana?</h2>
+<ul>
+<li><strong>Resolución 2646/2008:</strong> marco general. Obliga a identificar, evaluar, prevenir, intervenir y monitorear los factores de riesgo psicosocial. Sigue plenamente vigente.</li>
+<li><strong>Resolución 2764/2022:</strong> adopta la Batería de Instrumentos actualizada como herramienta oficial obligatoria. Aplica a toda empresa con contratos laborales, sin importar el tamaño.</li>
+<li><strong>Decreto 728/2025:</strong> obliga a implementar acciones concretas de promoción de salud mental y prevención de SPA, basadas en los resultados de la evaluación psicosocial.</li>
+</ul>
+<p>El incumplimiento expone a sanciones de hasta <strong>500 SMMLV</strong> (~$711 millones en 2026), cierre temporal y responsabilidad agravada ante eventos de origen psicosocial.</p>
+<h2>¿Qué mide la Batería de Riesgo Psicosocial?</h2>
+<ul>
+<li><strong>Cuestionarios intralaborales (Formas A y B):</strong> condiciones dentro del trabajo — demandas, control, liderazgo, relaciones y recompensas.</li>
+<li><strong>Cuestionario extralaboral:</strong> entorno fuera del trabajo — familia, vivienda, transporte, economía.</li>
+<li><strong>Cuestionario de estilos de afrontamiento:</strong> cómo responde cada trabajador ante las situaciones de estrés.</li>
+<li><strong>Cuestionario de estrés:</strong> síntomas físicos, emocionales y conductuales del estrés.</li>
+</ul>
+<p>Los cuestionarios y el consentimiento informado se diligencian en <strong>formato físico</strong>, requisito de la Res. 2764/2022. Los resultados se expresan por nivel de riesgo para cada dimensión, segmentados por cargo y área.</p>
+<h2>Los 5 pasos para implementarla correctamente</h2>
+<ul>
+<li><strong>1. Planeación:</strong> cronograma, población objeto, logística y consentimientos.</li>
+<li><strong>2. Aplicación:</strong> jornadas con cuestionarios físicos. El psicólogo puede acompañar presencial o virtualmente.</li>
+<li><strong>3. Procesamiento:</strong> análisis estadístico por área y nivel de riesgo.</li>
+<li><strong>4. Informe técnico:</strong> firmado por psicólogo con licencia SST, válido ante el Ministerio del Trabajo.</li>
+<li><strong>5. Intervención:</strong> Plan de Intervención de Riesgo Psicosocial (PIRP) y, si aplica, PVE Psicosocial.</li>
+</ul><div class="art-cta"><h3>¿Su empresa necesita evaluar el riesgo psicosocial?</h3><p>Sesión diagnóstica gratuita de 30 minutos. Cali y toda Colombia.</p><a href="mailto:josedavidalomia@gmail.com?subject=Consulta%20blog%3A%20riesgo-psicosocial-colombia" class="btn btn-p" style="margin-right:10px">Solicitar diagnóstico →</a><button onclick="goPage('ivso')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Hacer el IVSO</button></div></div></div><div class="blog-art" id="art-sobrecarga-laboral-riesgo-psicosocial"><div class="blog-art-inner"><button class="blog-back" onclick="closeBlog()">← Volver al blog</button><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><h1>Sobrecarga y Ritmo de Trabajo: Cuando el Exceso se Vuelve Riesgo Psicosocial</h1><div class="art-meta">Jose David Alomía G. &nbsp;·&nbsp; Julio 2026 &nbsp;·&nbsp; 7 min de lectura</div><h2>La carga que nadie ve en el organigrama</h2>
+<p>Un trabajador puede llegar puntual, cumplir metas y sonreír en las reuniones — mientras acumula una deuda de energía que el cuerpo cobra tarde o temprano. La sobrecarga laboral no siempre grita: a veces susurra en forma de insomnio, irritabilidad o cefaleas.</p>
+<p>En la Batería de Riesgo Psicosocial colombiana, la sobrecarga y el ritmo de trabajo son dimensiones del <strong>dominio Demandas del Trabajo</strong>. Cuando marcan nivel alto o muy alto, la norma exige intervención.</p>
+<h2>¿Qué mide la batería en esta dimensión?</h2>
+<ul>
+<li>Cantidad de trabajo asignada en relación con el tiempo disponible</li>
+<li>Velocidad y ritmo al que se debe trabajar</li>
+<li>Posibilidad de pausas y recuperación durante la jornada</li>
+<li>Presión de plazos y consecuencias de no cumplirlos</li>
+</ul>
+<h2>¿Cuánto cuesta la sobrecarga no gestionada?</h2>
+<p>La investigación es consistente: la sobrecarga sostenida produce ausentismo por incapacidades médicas (estrés, hipertensión, trastornos del sueño), rotación con costos del 50%–200% del salario anual, y errores operacionales por fatiga cognitiva. En sectores como manufactura, transporte y salud, también se traduce en riesgo de accidentalidad.</p>
+<h2>Señales de alerta para líderes</h2>
+<ul>
+<li>Colaboradores que sistemáticamente trabajan más allá de la jornada contractual</li>
+<li>Equipos que no toman pausas "por la carga"</li>
+<li>Alta frecuencia de incapacidades por cefalea, gastritis o "estrés"</li>
+<li>Reuniones que se extienden sin agenda ni cierre</li>
+</ul>
+<h2>Intervenciones que funcionan</h2>
+<ul>
+<li><strong>Rediseño de carga:</strong> redistribución de tareas y eliminación de tareas de bajo valor.</li>
+<li><strong>Claridad de rol:</strong> definir qué se espera de cada cargo y qué no es su responsabilidad.</li>
+<li><strong>Política de desconexión digital:</strong> protocolos claros sobre disponibilidad fuera de la jornada.</li>
+<li><strong>Seguimiento de indicadores:</strong> horas extra, tasa de ausentismo y carga percibida como métricas del SG-SST.</li>
+</ul><div class="art-cta"><h3>¿Su empresa necesita evaluar el riesgo psicosocial?</h3><p>Sesión diagnóstica gratuita de 30 minutos. Cali y toda Colombia.</p><a href="mailto:josedavidalomia@gmail.com?subject=Consulta%20blog%3A%20sobrecarga-laboral-riesgo-psicosocial" class="btn btn-p" style="margin-right:10px">Solicitar diagnóstico →</a><button onclick="goPage('ivso')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Hacer el IVSO</button></div></div></div><div class="blog-art" id="art-falta-de-control-autonomia-laboral"><div class="blog-art-inner"><button class="blog-back" onclick="closeBlog()">← Volver al blog</button><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><h1>Falta de Control en el Trabajo: Por Qué la Autonomía es el Riesgo que Más Cuesta Ignorar</h1><div class="art-meta">Jose David Alomía G. &nbsp;·&nbsp; Julio 2026 &nbsp;·&nbsp; 7 min de lectura</div><h2>El trabajador experto que no puede decidir</h2>
+<p>Un colaborador con años de experiencia sabe cómo resolver una tarea más eficientemente que el procedimiento que le impusieron. Sin embargo, no puede decidirlo. Cada paso está guionizado, cada decisión requiere autorización. Eso se llama <strong>falta de control sobre el trabajo</strong> — y la investigación muestra que es tan dañino como la sobrecarga misma.</p>
+<h2>El modelo Demanda-Control: la evidencia detrás de la norma</h2>
+<p>Robert Karasek demostró que la combinación de <strong>alta demanda + bajo control</strong> es la que mayor daño produce sobre la salud. No es la carga lo que enferma: es la carga sin margen de decisión. Este es el fundamento de la dimensión "Control sobre el trabajo" en la Batería de Riesgo Psicosocial colombiana.</p>
+<h2>¿Qué evalúa la batería en esta dimensión?</h2>
+<ul>
+<li><strong>Posibilidad de iniciativa:</strong> ¿puede el trabajador decidir cómo hacer su labor?</li>
+<li><strong>Uso de conocimientos y habilidades:</strong> ¿el trabajo le permite aplicar lo que sabe?</li>
+<li><strong>Participación en el cambio:</strong> ¿tiene voz en las decisiones que afectan su trabajo?</li>
+</ul>
+<h2>Consecuencias documentadas</h2>
+<ul>
+<li>Mayor incidencia de trastornos cardiovasculares</li>
+<li>Agotamiento emocional y burnout acelerado</li>
+<li>Menor compromiso y mayor rotación</li>
+<li>Reducción de la innovación y resolución de problemas</li>
+</ul>
+<h2>Cómo intervenir</h2>
+<ul>
+<li><strong>Delegación real:</strong> definir qué decisiones pertenecen a cada nivel y respetarlo.</li>
+<li><strong>Diseño participativo de procesos:</strong> involucrar a los equipos en la definición de procedimientos.</li>
+<li><strong>Formación de líderes:</strong> el liderazgo controlador es el principal generador de baja autonomía percibida.</li>
+</ul><div class="art-cta"><h3>¿Su empresa necesita evaluar el riesgo psicosocial?</h3><p>Sesión diagnóstica gratuita de 30 minutos. Cali y toda Colombia.</p><a href="mailto:josedavidalomia@gmail.com?subject=Consulta%20blog%3A%20falta-de-control-autonomia-laboral" class="btn btn-p" style="margin-right:10px">Solicitar diagnóstico →</a><button onclick="goPage('ivso')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Hacer el IVSO</button></div></div></div><div class="blog-art" id="art-apt-bateria-vs-determinacion-origen"><div class="blog-art-inner"><button class="blog-back" onclick="closeBlog()">← Volver al blog</button><span class="blog-tag-pill" style="color:#7C3AED;background:#F5F0FF">Técnico — SST</span><h1>Análisis de Puesto de Trabajo: Batería vs. Determinación de Origen — La Diferencia que Toda Empresa Debe Conocer</h1><div class="art-meta">Jose David Alomía G. &nbsp;·&nbsp; Julio 2026 &nbsp;·&nbsp; 9 min de lectura</div><h2>Un nombre, dos instrumentos distintos</h2>
+<p>En Colombia existe una confusión frecuente con consecuencias legales serias: el <strong>APT de la Batería de Riesgo Psicosocial</strong> y el <strong>APT para determinación de origen</strong> comparten nombre pero tienen propósitos, marcos normativos y metodologías radicalmente diferentes.</p>
+<h2>APT de la Batería Psicosocial — Propósito preventivo</h2>
+<p>Parte de la Batería adoptada por la Res. 2764/2022. Su función es <strong>identificar y caracterizar las condiciones del cargo</strong> que pueden generar exposición a factores de riesgo psicosocial intralaboral.</p>
+<ul>
+<li><strong>Marco normativo:</strong> Res. 2646/2008, Res. 2764/2022</li>
+<li><strong>Unidad de análisis:</strong> el cargo (no la persona)</li>
+<li><strong>Uso:</strong> complementar los cuestionarios de la batería, priorizar intervenciones del PIRP</li>
+</ul>
+<h2>APT para Determinación de Origen — Propósito pericial</h2>
+<p>Se realiza cuando existe una presunta enfermedad laboral y se requiere establecer la <strong>relación de causalidad</strong> entre las condiciones del cargo y el diagnóstico médico. Es un documento pericial con peso probatorio ante EPS, ARL y Juntas de Calificación.</p>
+<ul>
+<li><strong>Marco normativo:</strong> Decreto 1477/2014, Decreto 1072/2015, protocolo de determinación de origen</li>
+<li><strong>Unidad de análisis:</strong> el trabajador en su cargo específico, en el período de exposición relevante</li>
+<li><strong>Uso:</strong> soportar o refutar un dictamen de origen ante la Junta de Calificación</li>
+</ul>
+<h2>El error más frecuente y su costo</h2>
+<p>El error típico: presentar ante una Junta de Calificación el APT preventivo de la batería como soporte de un proceso de origen. El instrumento no está diseñado para ese fin, no triangula las fuentes que el protocolo exige y no tiene el peso probatorio requerido. Resultado: un dictamen impugnable o un proceso que se alarga innecesariamente.</p><div class="art-cta"><h3>¿Su empresa necesita evaluar el riesgo psicosocial?</h3><p>Sesión diagnóstica gratuita de 30 minutos. Cali y toda Colombia.</p><a href="mailto:josedavidalomia@gmail.com?subject=Consulta%20blog%3A%20apt-bateria-vs-determinacion-origen" class="btn btn-p" style="margin-right:10px">Solicitar diagnóstico →</a><button onclick="goPage('ivso')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Hacer el IVSO</button></div></div></div><div class="blog-art" id="art-bateria-psicosocial-cali-guia"><div class="blog-art-inner"><button class="blog-back" onclick="closeBlog()">← Volver al blog</button><span class="blog-tag-pill" style="color:#2EAF7D;background:#EDFBF4">Guía Práctica</span><h1>Batería de Riesgo Psicosocial en Cali: Guía Práctica para Empresas del Valle del Cauca</h1><div class="art-meta">Jose David Alomía G. &nbsp;·&nbsp; Julio 2026 &nbsp;·&nbsp; 6 min de lectura</div><h2>La batería psicosocial no es opcional en Cali ni en ningún municipio</h2>
+<p>La Resolución 2764/2022 aplica a toda empresa colombiana con contratos laborales vigentes, sin importar su ubicación. Sin embargo, en el Valle del Cauca el cumplimiento efectivo es bajo: muchas empresas conocen la obligación pero no saben cómo implementarla con el rigor que exige el Ministerio del Trabajo.</p>
+<h2>¿Quién puede aplicarla?</h2>
+<p>Solo psicólogos con <strong>tarjeta profesional vigente y licencia en Salud Ocupacional o SST</strong> están habilitados para aplicar, interpretar y firmar el informe técnico. Un informe sin esa firma no tiene validez ante entes de control.</p>
+<h2>El proceso en una empresa de Cali</h2>
+<ul>
+<li><strong>Reunión diagnóstica:</strong> entender la estructura, los cargos y la logística (sedes, turnos, modalidades).</li>
+<li><strong>Aplicación:</strong> jornadas con cuestionarios impresos y consentimientos físicos. El acompañamiento puede ser presencial en Cali o virtual para trabajadores en otras ciudades.</li>
+<li><strong>Informe técnico:</strong> con dashboard ejecutivo y hoja de ruta. Válido ante cualquier ente de control.</li>
+<li><strong>Presentación a gerencia:</strong> hallazgos en lenguaje de negocio (costos, riesgos legales, ROI).</li>
+</ul>
+<h2>¿Qué sigue después del informe?</h2>
+<p>El informe no es el destino: es el punto de partida. La norma exige un <strong>Plan de Intervención de Riesgo Psicosocial (PIRP)</strong>. Las empresas que se quedan solo con el informe están cumpliendo el 40% de la obligación y asumiendo el 100% del riesgo legal.</p><div class="art-cta"><h3>¿Su empresa necesita evaluar el riesgo psicosocial?</h3><p>Sesión diagnóstica gratuita de 30 minutos. Cali y toda Colombia.</p><a href="mailto:josedavidalomia@gmail.com?subject=Consulta%20blog%3A%20bateria-psicosocial-cali-guia" class="btn btn-p" style="margin-right:10px">Solicitar diagnóstico →</a><button onclick="goPage('ivso')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)">Hacer el IVSO</button></div></div></div>  <div class="footer-slot"></div>
+</div>
+
 <template id="ftpl">
 <footer style="background:var(--M);padding:48px 0 24px">
   <div class="wrap">
     <div class="footer-main-grid">
       <div><p style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.75;max-width:260px;margin-bottom:16px">Psicología organizacional y bienestar laboral con evidencia técnica. Cali, Colombia.</p>
         <div style="display:flex;gap:10px">
+          <a href="https://www.linkedin.com/in/vitalisempresarial" target="_blank" rel="noopener" title="LinkedIn" style="width:36px;height:36px;border-radius:8px;background:#0A66C2;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;font-weight:700">in</a>
+          <a href="https://www.instagram.com/vitalisempresarial/" target="_blank" rel="noopener" title="Instagram" style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px">📷</a>
           <a href="https://wa.me/573168768220" target="_blank" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none">💬</a>
           <a href="tel:+573150530457" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none">📞</a>
           <a href="mailto:josedavidalomia@gmail.com" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none">✉️</a>
@@ -3262,6 +3405,17 @@ setTimeout(load, 150);
 
 // Expose globals
 window.startEval=startEval;
+
+function openBlog(slug){
+  document.querySelectorAll('.blog-art').forEach(function(a){a.classList.remove('open')});
+  var e=document.getElementById('art-'+slug);
+  if(e){e.classList.add('open');e.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function closeBlog(){
+  document.querySelectorAll('.blog-art').forEach(function(a){a.classList.remove('open')});
+}
+window.openBlog=openBlog;window.closeBlog=closeBlog;
+
 window.genPDF=genPDF;
 window.selOpt=selOpt;
 window.tryNext=tryNext;
