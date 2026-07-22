@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vitalis Empresarial® — Bienestar Organizacional | Cali, Colombia</title>
-<meta name="description" content="Consultoría especializada en riesgo psicosocial, SST y bienestar organizacional. Cali, Colombia.">
+<meta name="description" content="Batería de riesgo psicosocial (Res. 2764/2022), PVE y salud mental laboral para empresas de 10 a 200 trabajadores en Cali y Colombia. Diagnóstico IVSO gratuito con análisis IA personalizado. Decreto 728/2025.">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
 
@@ -47,6 +47,9 @@ button{font-family:inherit}
 /* ═══════ BUTTONS ═══════ */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:7px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;cursor:pointer;border:2px solid transparent;transition:.22s;white-space:nowrap;text-decoration:none}
 .btn-p{background:var(--T);color:#fff;border-color:var(--T)}
+.btn-ivso{background:var(--O);color:var(--M);border-color:var(--O);font-weight:800;position:relative;overflow:hidden;letter-spacing:.3px}
+.btn-ivso::before{content:"GRATIS";position:absolute;top:-1px;right:-1px;background:#22C55E;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 7px;border-radius:0 9px 0 6px;text-transform:uppercase}
+.btn-ivso:hover{background:#b8973e;border-color:#b8973e}
 .btn-p:hover{background:#0a6b6a;transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,124,123,.38)}
 .btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
 .btn-o:hover{background:rgba(255,255,255,.1);border-color:#fff}
@@ -734,7 +737,8 @@ img{max-width:100%;height:auto}
           <p class="hero-sub">Consultoría especializada en riesgo psicosocial, SST y transformación organizacional con evidencia técnica y resultados medibles.</p>
           <div class="hero-btns">
             <a class="btn btn-p" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reuni%C3%B3n+diagn%C3%B3stica+Vitalis+Empresarial&details=Sesi%C3%B3n+ejecutiva+gratuita+de+30+minutos+con+Vitalis+Empresarial.%0ATel%3A+315+053+0457+%7C+WhatsApp%3A+316+876+8220&add=josedavidalomia@gmail.com" target="_blank">Reunión diagnóstica gratuita →</a>
-            <button class="btn btn-o" onclick="goPage('servicios')">Ver servicios</button>
+            <button class="btn btn-ivso" onclick="goPage('ivso')">🤖 Diagnóstico IVSO gratuito →</button>
+            <button class="btn btn-o" onclick="goPage('servicios')" style="font-size:12.5px;padding:10px 20px">Ver servicios</button>
           </div>
           <div class="hero-stats">
             <div><div class="hs-n">+7</div><div class="hs-l">Años de<br>experiencia SST</div></div>
