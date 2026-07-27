@@ -124,6 +124,9 @@ button{font-family:inherit}
 .ps-n{font-family:'Montserrat',sans-serif;font-weight:900;font-size:40px;color:var(--M);line-height:1;margin-bottom:4px}
 .ps-n span{color:var(--T);font-size:28px}
 .ps-l{font-size:12px;color:var(--gr);line-height:1.5}
+.ps-q{color:var(--O)!important;font-size:32px!important}
+.proof-src{font-size:10.5px;color:var(--gr);line-height:1.7;text-align:center;max-width:860px;margin:18px auto 0;padding-top:14px;border-top:1px solid var(--bd)}
+
 
 /* ═══════ PROBLEM ═══════ */
 .prob-box{background:var(--M);border-radius:18px;padding:38px;position:relative;overflow:hidden}
@@ -772,12 +775,18 @@ img{max-width:100%;height:auto}
   <div class="proof">
     <div class="wrap"><p class="proof-lbl">Impacto real del riesgo psicosocial en Colombia</p>
       <div class="proof-row">
-        <div class="ps"><div class="ps-n">68<span>%</span></div><div class="ps-l">Trabajadores con<br>estrés significativo</div></div>
+        <div class="ps"><div class="ps-n ps-q">#1</div><div class="ps-l">Primera causa de<br>enfermedad laboral<br>en Colombia</div></div>
         <div class="ps"><div class="ps-n">$711<span>M</span></div><div class="ps-l">Multa máxima por<br>incumplimiento SST</div></div>
-        <div class="ps"><div class="ps-n">200<span>%</span></div><div class="ps-l">Costo de rotar<br>a un colaborador</div></div>
-        <div class="ps"><div class="ps-n">70<span>%</span></div><div class="ps-l">Conflictos con<br>raíz en liderazgo</div></div>
+        <div class="ps"><div class="ps-n">3<span>–6×</span></div><div class="ps-l">El salario mensual<br>cuesta cada<br>reemplazo de cargo</div></div>
+        <div class="ps"><div class="ps-n ps-q">#1</div><div class="ps-l">Factor de riesgo<br>de mayor impacto<br>en clima laboral</div></div>
         <div class="ps"><div class="ps-n">6<span>+</span></div><div class="ps-l">Sectores con<br>experiencia directa</div></div>
       </div>
+      <p class="proof-src">
+        ¹ Sistema de Riesgos Laborales, Ministerio del Trabajo (informes anuales de calificación de enfermedades laborales) · 
+        ² Ley 1562/2012, Art. 13, 500 SMMLV · 
+        ³ ACRIP — Federación Colombiana de Gestión Humana, <em>Costos de rotación laboral en Colombia</em> · 
+        ⁴ Dominio "Liderazgo y relaciones sociales en el trabajo", Batería de Riesgo Psicosocial, Res. 2764/2022 — Ministerio del Trabajo
+      </p>
     </div>
   </div>
 
@@ -788,7 +797,7 @@ img{max-width:100%;height:auto}
           <div class="prob-big">$711M</div>
           <div class="prob-sm">Multa máxima · Ley 1562/2012 · 500 SMMLV</div>
           <div class="prob-items">
-            <div class="pi"><div class="pi-ic">📉</div><div><div class="pi-t">Alta rotación sin causa</div><div class="pi-p">Cada rotación cuesta 50%–200% del salario anual del cargo.</div></div></div>
+            <div class="pi"><div class="pi-ic">📉</div><div><div class="pi-t">Alta rotación sin causa</div><div class="pi-p">Reemplazar un cargo cuesta entre 3 y 6 veces el salario mensual (ACRIP).</div></div></div>
             <div class="pi"><div class="pi-ic">🏥</div><div><div class="pi-t">Ausentismo médico repetido</div><div class="pi-p">Incapacidades sin causa clara = estrés crónico no gestionado.</div></div></div>
             <div class="pi"><div class="pi-ic">⚖️</div><div><div class="pi-t">Riesgo legal activo</div><div class="pi-p">La Res. 2764/2022 es obligatoria. El tiempo de adaptación venció.</div></div></div>
           </div>
@@ -2354,7 +2363,7 @@ var DIMS = [
    desc:"Mide el impacto financiero y operativo del riesgo psicosocial en su empresa.",
    qs:[
     {t:"La rotación voluntaria de personal en el último año ha:",
-     hint:"La rotación elevada cuesta entre 50% y 200% del salario anual por persona reemplazada.",
+     hint:"La rotación elevada cuesta entre 3 y 6 veces el salario mensual por cargo reemplazado (ACRIP, Federación Colombiana de Gestión Humana).",
      ops:["Disminuido o se mantiene estable (menos del 10% anual)",
           "Aumentado moderadamente (entre 10% y 25% anual)",
           "Aumentado de forma preocupante (mas del 25% anual)"]},
@@ -2412,7 +2421,7 @@ var DIMS = [
           "No tiene forma de identificarlo ni atenderlo oportunamente"]}
    ]},
   {id:"lid", n:"Liderazgo y Cultura", w:0.15, cl:"#1A4B7C", wb:"wbl", wl:"15%",
-   desc:"El liderazgo explica el 70% de la varianza en clima laboral según estudios Gallup.",
+   desc:"El dominio Liderazgo y relaciones sociales es consistentemente el de mayor nivel de riesgo en empresas colombianas (Batería Res. 2764/2022).",
    qs:[
     {t:"El estilo de liderazgo predominante en su organización genera en los equipos:",
      ops:["Confianza, desarrollo y alto desempeno sostenido",
