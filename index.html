@@ -1797,20 +1797,26 @@ img{max-width:100%;height:auto}
   <div class="cta-box">
     <div class="cta-title">Revisemos sus resultados juntos</div>
     <div class="cta-sub" id="cta-text">En una sesión ejecutiva gratuita de 30 minutos le explicamos el significado de cada hallazgo, por qué aplica a su organización y cuáles son las acciones concretas para remediarlo. Sin compromiso.</div>
-    <a class="cta-btn" id="cta-link" href="mailto:josedavidalomia@gmail.com">Agendar sesión ejecutiva gratuita &mdash; 30 minutos</a>
+
+    <!-- NIVEL PRIMARIO: CTA comercial principal -->
+    <a class="cta-btn" id="cta-link" href="mailto:josedavidalomia@gmail.com?subject=Sesi%C3%B3n%20Ejecutiva%20Vitalis%20%E2%80%94%20Diagn%C3%B3stico%20IVSO&body=Hola%20Jose%20David%2C%0A%0ACompleto%20el%20%C3%8Dndice%20Vitalis%20(IVSO)%20y%20quisiera%20agendar%20la%20sesi%C3%B3n%20ejecutiva%20gratuita%20de%2030%20minutos.%0A%0AEmpresa%3A%20%0AN%C3%BAmero%20de%20trabajadores%3A%20%0ACiudad%3A%20%0ATel%C3%A9fono%20de%20contacto%3A%20%0A%C3%8Dndice%20IVSO%20obtenido%3A%20%0A%0AGracias.">Agendar sesión ejecutiva gratuita &mdash; 30 minutos</a>
     <div class="cta-note">Sin compromiso. Sin costo. Solo resultados.</div>
-    <div style="margin-top:14px"><button id="pdf-btn" onclick="genPDF()" style="background:transparent;border:1.5px solid rgba(255,255,255,.55);color:#fff;padding:11px 22px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif">Descargar mi informe (PDF)</button></div>
+
+    <!-- NIVEL SECUNDARIO: descarga del informe -->
+    <div style="margin-top:18px">
+      <button id="pdf-btn" onclick="genPDF()" style="background:transparent;border:2px solid #C9A84C;color:#C9A84C;padding:11px 26px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:.3px">⬇ Descargar informe PDF</button>
+    </div>
+
+    <!-- NIVEL TERCIARIO: acciones discretas agrupadas -->
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
+      <button onclick="window.print()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer;font-family:'Open Sans',sans-serif;padding:4px 8px;border-radius:6px" onmouseover="this.style.color='rgba(255,255,255,.85)'" onmouseout="this.style.color='rgba(255,255,255,.5)'">🖨 Imprimir</button>
+      <button onclick="cpRep()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer;font-family:'Open Sans',sans-serif;padding:4px 8px;border-radius:6px" onmouseover="this.style.color='rgba(255,255,255,.85)'" onmouseout="this.style.color='rgba(255,255,255,.5)'">📋 Copiar informe</button>
+      <button onclick="resetApp()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer;font-family:'Open Sans',sans-serif;padding:4px 8px;border-radius:6px" onmouseover="this.style.color='rgba(255,255,255,.85)'" onmouseout="this.style.color='rgba(255,255,255,.5)'">↺ Nueva evaluación</button>
+    </div>
   </div>
   <div class="rpt-box">
     <div class="rpt-title">Informe ejecutivo completo</div>
     <div class="rpt-pre" id="rpt-pre">El informe se generará al completar el diagnóstico...</div>
-  </div>
-
-  <div class="ab">
-    <button class="ab2 bt" onclick="dlTXT()" style="color:#fff">Descargar informe .TXT</button>
-    <button class="ab2 bg2" onclick="window.print()" style="color:#0D1B2A">Imprimir / PDF</button>
-    <button class="ab2" onclick="cpRep()">Copiar informe</button>
-    <button class="ab2 brd" onclick="resetApp()" style="color:#fff">Nueva evaluación</button>
   </div>
 </div>
 
@@ -3018,7 +3024,7 @@ function showRes() {
 
   /* CTA email link */
   var mailSub = 'Sesión Ejecutiva Vitalis — ' + emp;
-  var mailBody = 'Hola Jose David,\n\nCompleto el Índice Vitalis y me gustaria agendar la sesión ejecutiva gratuita de 30 minutos.\n\nEmpresa: ' + emp + '\nContacto: ' + (document.getElementById('fco').value || '') + '\nTelefono: ' + (document.getElementById('ftel').value || '') + '\n\nGracias.';
+  var mailBody = 'Hola Jose David,\n\nCompleto el Índice Vitalis (IVSO) y quisiera agendar la sesión ejecutiva gratuita de 30 minutos.\n\nEmpresa: ' + emp + '\nNúmero de trabajadores: '+ (document.getElementById('fnum').value||'') +'\nCiudad: \nTeléfono de contacto: ' + (document.getElementById('ftel').value || '') + '\nÍndice IVSO obtenido: ' + (typeof ivso !== 'undefined' ? ivso.toFixed(1) + ' / 10' : '') + '\n\nGracias.';
   document.getElementById('cta-link').href = 'mailto:josedavidalomia@gmail.com?subject=' + encodeURIComponent(mailSub) + '&body=' + encodeURIComponent(mailBody);
   var rc = document.getElementById('rec-cta');
   if (rc) rc.href = document.getElementById('cta-link').href;
