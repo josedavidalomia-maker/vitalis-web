@@ -546,15 +546,9 @@ img{max-width:100%;height:auto}
 .ivso-wrap .rpt-box {background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:16px;margin-bottom:12px}
 .ivso-wrap .rpt-title {font-size:12px;font-weight:700;color:#6B7280;margin-bottom:10px}
 .ivso-wrap .rpt-box{display:none}
-.ivso-wrap .crmc{display:none}
 .ivso-wrap .ab{display:none}
 .ivso-wrap .rpt-pre {font-size:11.5px;font-family:monospace;white-space:pre-wrap;color:#1F2937;line-height:1.7;max-height:300px;overflow-y:auto}
-.ivso-wrap .crmc{display:none}
 .ivso-wrap .crmc-off {background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px;margin-bottom:12px}
-.ivso-wrap .crmt {font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px}
-.ivso-wrap .crmok {background:#DCFCE7;color:#166534;border:1px solid #86EFAC;border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px}
-.ivso-wrap .crmpd {background:#FEF9C3;color:#854D0E;border:1px solid #FDE047;border-radius:8px;padding:10px 12px;font-size:12px;margin-bottom:10px}
-.ivso-wrap .crmd {background:#F9FAFB;border-radius:8px;border:1px solid #E5E7EB;padding:12px;font-size:11px;font-family:monospace;white-space:pre-wrap;max-height:200px;overflow-y:auto;margin-top:8px}
 .ivso-wrap .ab{display:none}
 .ivso-wrap .ab-off {display:flex;gap:10px;flex-wrap:wrap}
 .ivso-wrap .ab2 {flex:1;min-width:140px;padding:12px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;text-align:center;border:1.5px solid #D1D5DB;background:#fff;transition:.15s}
@@ -1797,16 +1791,7 @@ img{max-width:100%;height:auto}
     <div class="rpt-title">Informe ejecutivo completo</div>
     <div class="rpt-pre" id="rpt-pre">El informe se generará al completar el diagnóstico...</div>
   </div>
-  <div class="crmc">
-    <div class="crmt">Registro en base de prospectos Vitalis</div>
-    <div id="crmsg" class="crmpd">Haz clic en Generar datos CRM para estructurar la información.</div>
-    <div id="crmout"></div>
-    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-      <button class="btn bt" onclick="genCRM()" style="flex:1">Generar datos CRM</button>
-      <button class="btn" onclick="copyCRM()" style="flex:1">Copiar datos CRM</button>
-      <a class="btn" href="https://docs.google.com/spreadsheets/d/1CH0yRb0uJvUN-p3L1GPExDnyREo7ww87/edit" target="_blank" rel="noopener" style="flex:1;background:#0F9D58;border-color:#0F9D58;color:#fff;justify-content:center;text-decoration:none;display:inline-flex;align-items:center">📊 Abrir Prospectos</a>
-    </div>
-  </div>
+
   <div class="ab">
     <button class="ab2 bt" onclick="dlTXT()" style="color:#fff">Descargar informe .TXT</button>
     <button class="ab2 bg2" onclick="window.print()" style="color:#0D1B2A">Imprimir / PDF</button>
@@ -3423,13 +3408,8 @@ function sendCRMByEmail(crm) {
 }
 
 function sendCRMToSheet(crm) {
-  var msgEl = document.getElementById('crmsg');
   sendCRMByEmail(crm);
-  if (!SHEET_WEBAPP_URL) {
-    if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto enviado a tu correo (' + (crm['Empresa']||'-') + '). El registro en Google Sheets aún no esta configurado.'; }
-    return;
-  }
-  if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='Registrando automáticamente en la base de prospectos...'; }
+  if (!SHEET_WEBAPP_URL) { return; }
   try {
     fetch(SHEET_WEBAPP_URL, {
       method: 'POST',
@@ -3437,31 +3417,12 @@ function sendCRMToSheet(crm) {
       headers: {'Content-Type': 'text/plain;charset=utf-8'},
       body: JSON.stringify(Object.assign({}, crm, {'Informe completo': (typeof rptFull==='string'? rptFull : '')}))
     }).then(function() {
-      if (msgEl) { msgEl.className='crmok'; msgEl.textContent='Prospecto registrado automáticamente en Google Sheets (' + crm['Empresa'] + ').'; }
     }).catch(function() {
-      if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automáticamente. Usa "Copiar datos CRM" como respaldo.'; }
     });
   } catch(e) {
-    if (msgEl) { msgEl.className='crmpd'; msgEl.textContent='No se pudo registrar automáticamente. Usa "Copiar datos CRM" como respaldo.'; }
   }
 }
 
-function genCRM() {
-  var crm = buildCRMObj();
-  crmTxt = JSON.stringify(crm, null, 2);
-  var lines = Object.keys(crm).map(function(k) { return k + ': ' + crm[k]; }).join('\n');
-  document.getElementById('crmout').innerHTML = '<div class="crmd">' + lines + '</div>';
-  document.getElementById('crmsg').className = 'crmok';
-  document.getElementById('crmsg').textContent = 'Datos estructurados. Si configuraste el registro automatico, ya están en tu hoja; si no, usa Copiar.';
-  sendCRMToSheet(crm);
-}
-
-function copyCRM() {
-  if (!crmTxt) genCRM();
-  if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(crmTxt).then(function() { alert('Datos CRM copiados'); }).catch(function() { fallbackCopy(crmTxt, 'Datos CRM copiados'); });
-  } else { fallbackCopy(crmTxt, 'Datos CRM copiados'); }
-}
 
 /* ================================================================
    DOWNLOAD / COPY
@@ -3568,9 +3529,6 @@ function resetApp() {
   document.getElementById('fn').selectedIndex = 0;
   /* Clear report preview */
   document.getElementById('rpt-pre').textContent = 'El informe se generará al completar el diagnóstico...';
-  document.getElementById('crmout').innerHTML = '';
-  document.getElementById('crmsg').className = 'crmpd';
-  document.getElementById('crmsg').textContent = 'Haz clic en Generar datos CRM para estructurar la información.';
   cur = 0;
   gst(0);
 }
@@ -3598,9 +3556,7 @@ window.tryNext=tryNext;
 window.gst=gst;
 window.resetApp=resetApp;
 window.dlTXT=dlTXT;
-window.genCRM=genCRM;
 window.cpRep=cpRep;
-window.copyCRM=copyCRM;
 window.buildSteps=buildSteps;
 window.validateStep=validateStep;
 window.sel=sel;
