@@ -175,15 +175,8 @@ button{font-family:inherit}
 .planes-sec{margin-top:56px}
 
 /* ═══════ BLOG ═══════ */
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
-@media(max-width:900px){.blog-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:580px){.blog-grid{grid-template-columns:1fr}}
 .blog-card{background:#fff;border:1px solid var(--bd);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(13,27,42,.06);transition:box-shadow .18s;cursor:pointer;padding:24px}
 .blog-card:hover{box-shadow:0 10px 32px rgba(13,27,42,.13)}
-.blog-tag-pill{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:4px 10px;border-radius:999px;margin-bottom:10px}
-.blog-title-t{font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:var(--M);line-height:1.35;margin-bottom:8px}
-.blog-excerpt-t{font-size:13px;color:var(--gr);line-height:1.65;flex:1}
-.blog-meta-t{font-size:11px;color:var(--gr);margin-top:14px;padding-top:12px;border-top:1px solid var(--bd);display:flex;gap:12px;flex-wrap:wrap}
 .blog-art{display:none;background:#fff;padding:48px 0 72px}
 .blog-art.open{display:block}
 .blog-art-inner{max-width:780px;margin:0 auto;padding:0 24px}
@@ -2180,7 +2173,7 @@ img{max-width:100%;height:auto}
 <div class="page" id="pg-blog">
   <div class="pg-hdr pg-hdr-dark"><div class="wrap"><span class="ey ey-lt">Contenido de autoridad</span><h2 class="h2 h2-lt">Recursos sobre Riesgo Psicosocial<br>y SST en Colombia</h2><p class="lead lead-lt">Artículos técnicos escritos por psicólogo especialista en SST, con base normativa actualizada (Res. 2764/2022 · Decreto 728/2025).</p></div></div>
   <div class="pg-nav-bar"><div style="display:flex;flex-wrap:nowrap;gap:6px;padding:8px 20px;width:max-content;min-width:100%"><button class="pg-nav-pill" onclick="goPage('inicio')">Inicio</button><button class="pg-nav-pill" onclick="goPage('servicios')">Servicios</button><button class="pg-nav-pill" onclick="goPage('normativa')">Normativa</button><button class="pg-nav-pill" onclick="goPage('ivso')">Diagnóstico IVSO</button><button class="pg-nav-pill" onclick="goPage('contacto')">Contacto</button></div></div>
-  <div style="background:var(--S);padding:52px 0 72px"><div class="wrap"><div class="blog-grid"><div class="blog-card" onclick="openBlog('riesgo-psicosocial-colombia')"><span class="blog-tag-pill" style="color:#1A4B7C;background:#EFF4FF">Normativa SST</span><div class="blog-title-t">Riesgo Psicosocial en Colombia: Qué es, Qué Exige la Ley y Cómo Actuar</div><div class="blog-excerpt-t">La Resolución 2764/2022 obliga a toda empresa con contratos laborales a evaluar el riesgo psicosocial. Qué mide la batería, qué dice la norma y 5 pasos para implementarla.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 8 min</span></div></div><div class="blog-card" onclick="openBlog('sobrecarga-laboral-riesgo-psicosocial')"><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><div class="blog-title-t">Sobrecarga y Ritmo de Trabajo: Cuando el Exceso se Vuelve Riesgo Psicosocial</div><div class="blog-excerpt-t">Plazos imposibles, multitareas continuas y jornadas que no terminan. La sobrecarga laboral es uno de los factores con mayor impacto en la batería psicosocial colombiana.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 7 min</span></div></div><div class="blog-card" onclick="openBlog('falta-de-control-autonomia-laboral')"><span class="blog-tag-pill" style="color:#0E7C7B;background:#EFFAF9">Factores de Riesgo</span><div class="blog-title-t">Falta de Control en el Trabajo: Por Qué la Autonomía es el Riesgo que Más Cuesta Ignorar</div><div class="blog-excerpt-t">No es la carga lo que enferma: es la carga sin margen de decisión. El modelo Demanda-Control lo confirma. Así lo mide la batería y así se interviene.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 7 min</span></div></div><div class="blog-card" onclick="openBlog('apt-bateria-vs-determinacion-origen')"><span class="blog-tag-pill" style="color:#7C3AED;background:#F5F0FF">Técnico — SST</span><div class="blog-title-t">Análisis de Puesto de Trabajo: Batería vs. Determinación de Origen — La Diferencia que Toda Empresa Debe Conocer</div><div class="blog-excerpt-t">Mismo nombre, propósitos completamente distintos. Confundirlos puede costarle un proceso de calificación de origen fallido o un plan de intervención que no atacó la causa real.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 9 min</span></div></div><div class="blog-card" onclick="openBlog('bateria-psicosocial-cali-guia')"><span class="blog-tag-pill" style="color:#2EAF7D;background:#EDFBF4">Guía Práctica</span><div class="blog-title-t">Batería de Riesgo Psicosocial en Cali: Guía Práctica para Empresas del Valle del Cauca</div><div class="blog-excerpt-t">¿Su empresa en Cali ya aplicó la batería psicosocial? Sepa qué exige la Res. 2764/2022, cómo se aplica correctamente y qué sigue después del informe.</div><div class="blog-meta-t"><span>📅 Julio 2026</span><span>⏱ 6 min</span></div></div></div></div></div>
+
 <div style="background:#F2F5F9;padding:44px 0 60px">
     <div class="wrap">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
@@ -2236,6 +2229,15 @@ img{max-width:100%;height:auto}
           <span style="display:inline-block;background:#F5F3FF;color:#5B21B6;font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:10px;width:fit-content">Técnico avanzado</span>
           <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#0D1B2A;line-height:1.35;margin-bottom:8px;flex:1">Análisis de Puesto de Trabajo: Batería vs. Determinación de Origen</h3>
           <p style="font-size:12.5px;color:#6B7280;margin-bottom:12px;line-height:1.55">Mismo nombre, propósitos distintos. La diferencia que toda empresa debe conocer.</p>
+          <span style="font-size:12.5px;color:#0E7C7B;font-weight:700">Leer artículo →</span>
+        </a>
+        <a href="blog/bateria-riesgo-psicosocial-cali-valle-del-cauca.html" target="_blank"
+           style="background:#fff;border:1px solid #E5E7EB;border-radius:14px;padding:22px;text-decoration:none;display:flex;flex-direction:column;transition:.15s"
+           onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 24px rgba(13,27,42,.12)'"
+           onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <span style="display:inline-block;background:#EDFBF4;color:#065F46;font-size:9.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:999px;margin-bottom:10px;width:fit-content">Guía práctica · Cali</span>
+          <h3 style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;color:#0D1B2A;line-height:1.35;margin-bottom:8px;flex:1">Batería de Riesgo Psicosocial en Cali: Guía para Empresas del Valle del Cauca</h3>
+          <p style="font-size:12.5px;color:#6B7280;margin-bottom:12px;line-height:1.55">Qué exige la Res. 2764/2022, cómo se aplica correctamente y qué sigue después del informe.</p>
           <span style="font-size:12.5px;color:#0E7C7B;font-weight:700">Leer artículo →</span>
         </a>
         <a href="blog/index.html" target="_blank"
